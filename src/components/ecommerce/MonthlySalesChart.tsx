@@ -29,6 +29,34 @@ export default function MonthlySalesChart() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
 
+  const createRecord = async () => {
+    try {
+      const response = await fetch('/api/test', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        // If you want to send dynamic data, add 'body: JSON.stringify(data)'
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Something went wrong');
+      }
+
+      console.log('Success! Inserted ID:', data.id);
+      return data;
+    } catch (error) {
+      console.error('Failed to create record:', error);
+      throw error;
+    }
+  };
+
+  useEffect(()=>{
+    createRecord();
+  },[])
+
   /* ========= READ FILE DIRECTLY ========= */
   useEffect(() => {
     fetch("/entity_intelligence_live_results.jsonl")
