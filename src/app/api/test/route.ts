@@ -2,18 +2,21 @@ import { MongoClient } from 'mongodb';
 import { NextResponse } from 'next/server';
 
 export async function POST() {
-    // Add the '!' assertion at the end to satisfy TypeScript
-    const uri = process.env.MONGODB_URI!; 
+    const uri = process.env.MONGODB_URI;
+
+    if (!uri) {
+        return NextResponse.json({ error: "Database URI not configured" }, { status: 500 });
+    }
 
     const client = new MongoClient(uri);
 
     try {
         await client.connect();
         const db = client.db("my_database");
-        const collection = db.collection("list");
+        const collection = db.collection("recorddata");
 
         const result = await collection.insertOne({
-            message: "Hello ",
+            message: "Hello from Next.js",
             timestamp: new Date()
         });
 
