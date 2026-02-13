@@ -5,8 +5,11 @@ import Label from "@/components/form/Label";
 import { ChevronLeftIcon, EyeCloseIcon, EyeIcon } from "@/icons";
 import Link from "next/link";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function SignUpForm() {
+  const router = useRouter();
+
   const [showPassword, setShowPassword] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
@@ -28,7 +31,7 @@ export default function SignUpForm() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        username: form.email,        // using email as username
+        username: form.email,
         password: form.password,
       }),
     });
@@ -36,34 +39,57 @@ export default function SignUpForm() {
     const data = await res.json();
 
     if (data.success) {
-      localStorage.setItem("token", data.token); // store JWT
+      localStorage.setItem("token", data.token);
       alert("Signup successful");
+      router.push("/signin");
     } else {
       alert(data.error || "Signup failed");
     }
   };
 
   return (
-    <div className="flex flex-col flex-1 lg:w-1/2 w-full overflow-y-auto no-scrollbar">
-      {/* UI UNCHANGED */}
-      <form onSubmit={handleSignup}>
-        <div className="space-y-5">
-          <Input name="fname" onChange={handleChange} />
-          <Input name="lname" onChange={handleChange} />
-          <Input name="email" onChange={handleChange} />
-          <Input
-            name="password"
-            type={showPassword ? "text" : "password"}
-            onChange={handleChange}
-          />
-          <button className="flex items-center justify-center w-full px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600">
+    <div className="flex flex-col flex-1 lg:w-1/2 w-full">
+      {/* <div className="w-full max-w-md sm:pt-10 mx-auto mb-5">
+        <Link href="/" className="inline-flex items-center text-sm text-gray-500">
+          <ChevronLeftIcon />
+          Back to dashboard
+        </Link>
+      </div> */}
+
+      <div className="flex flex-col justify-center flex-1 w-full max-w-md mx-auto">
+        <form onSubmit={handleSignup} className="space-y-5">
+          <div>
+            <Label>First Name *</Label>
+            <Input name="fname" onChange={handleChange} />
+          </div>
+
+          <div>
+            <Label>Last Name *</Label>
+            <Input name="lname" onChange={handleChange} />
+          </div>
+
+          <div>
+            <Label>Email *</Label>
+            <Input name="email" type="email" onChange={handleChange} />
+          </div>
+
+          <div className="relative">
+            <Label>Password *</Label>
+            <Input
+              name="password"
+              type={showPassword ? "text" : "password"}
+              onChange={handleChange}
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full py-3 text-sm font-medium text-white rounded-lg bg-brand-500"
+          >
             Sign Up
           </button>
-          <a href="/signin">
-            Go to Sign In Page
-          </a>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 }

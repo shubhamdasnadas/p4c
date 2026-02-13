@@ -1,5 +1,7 @@
+import bcrypt from "bcryptjs";
 import { MongoClient } from "mongodb";
 import { NextResponse } from "next/server";
+import jwt from "jsonwebtoken";
 
 export async function POST(request: Request) {
   const uri = process.env.MONGODB_URI!;
@@ -29,15 +31,29 @@ export async function POST(request: Request) {
       );
     }
 
-    if (user.password !== password) {
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
       return NextResponse.json(
         { success: false, error: "Invalid password" },
         { status: 401 }
       );
     }
 
+    // ✅ GENERATE JWT TOKEN (USE ENV SECRET)
+    const payload = {
+      sub: user._id.toString(),
+      username: user.username,
+    };
+
+    const token = jwt.sign(payload, "secret", {
+      expiresIn: "7d",
+    });
+
     return NextResponse.json({
       success: true,
+      token,          // ✅ Full valid JWT
+      user: payload,  // ✅ Decoded data for frontend
       message: "Login successful",
     });
 

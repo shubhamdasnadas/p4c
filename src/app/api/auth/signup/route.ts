@@ -1,5 +1,6 @@
 import { MongoClient } from "mongodb";
 import { NextResponse } from "next/server";
+import bcrypt from "bcryptjs";   // ✅ ADD
 
 export async function POST(request: Request) {
   const uri = process.env.MONGODB_URI!;
@@ -20,7 +21,6 @@ export async function POST(request: Request) {
     const db = client.db("my_database");
     const users = db.collection("users");
 
-    // Check existing user
     const existingUser = await users.findOne({ username });
 
     if (existingUser) {
@@ -30,9 +30,13 @@ export async function POST(request: Request) {
       );
     }
 
+    // ✅ HASH PASSWORD
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
     await users.insertOne({
       username,
-      password,           // ⚠ plain text (not secure, but per your request)
+      password: hashedPassword,   // ✅ SAVE HASHED PASSWORD
       createdAt: new Date(),
     });
 
