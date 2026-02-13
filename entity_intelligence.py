@@ -4,324 +4,213 @@ import time
 import re
 from datetime import datetime, timezone
 from bs4 import BeautifulSoup
-from newspaper import Article
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse, urldefrag
+from dateutil import parser as date_parser
+import pytz
 
 # ================= CONFIG ================= #
 
+ENTITY_NAME = "ICICI Securities"
+ENTITY_REGEX = re.compile(r"\bicici\s+securities\b", re.IGNORECASE)
+
+REQUEST_DELAY = 0.3
+MIN_TEXT_LENGTH = 150
+MAX_MONEYCONTROL_PAGES = 3
+
+OUTPUT_FILE = "entity_today_results.jsonl"
+
+IST = pytz.timezone("Asia/Kolkata")
+TODAY_IST = datetime.now(IST).date()
+
 HEADERS = {
-    "User-Agent": "Mozilla/5.0 (EntityIntelligence/4.0)"
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/120.0.0.0 Safari/537.36"
+    ),
+    "Accept-Language": "en-US,en;q=0.9",
+    "Referer": "https://www.google.com/"
 }
 
-OUTPUT_FILE = "entity_intelligence_live_results.jsonl"
-REQUEST_DELAY = 0.6
-MIN_BODY_LENGTH = 80
-MAX_GENERIC_ARTICLES = 700
+# ================= YOUR PROVIDED URLS ================= #
 
-# ================= ENTITY RULES ================= #
-
-ENTITY_KEYWORDS = [
-    "says", "said", "according to", "as per",
-    "recommends", "recommended",
-    "rating", "target price", "upside", "downside",
-    "buy", "sell", "hold",
-    "coverage", "outperform", "underperform",
-    "bullish", "positive", "cautious",
-    "stocks to buy", "top picks"
+STRICT_LISTING_URLS = [
+    "https://bharathorizon.com/",
+    "https://yournews.co.in/category/business",
+    "https://www.businesstoday.in/markets",
+    "https://www.msn.com/en-in/money",
+    "https://topnews.in/business-news/stock-markets",
+    "https://economictimes.indiatimes.com/markets/stocks/news",
+    "https://bfsi.economictimes.indiatimes.com/articles",
+    "https://www.ndtvprofit.com/markets/",
+    "https://zeenewsworld.com/business",
+    "https://www.business-standard.com/markets/news",
 ]
 
-BLOCK_TERMS = [
-    "icici bank",
-    "icici prudential",
-    "icici lombard",
-    "icici mutual",
-    "icici life"
-]
+MONEYCONTROL_BASE = "https://www.moneycontrol.com/news/business/markets/"
 
-# ================= SOURCES ================= #
+visited_urls = set()
 
-GENERIC_SOURCES = {
-    "NDTV Profit": "https://www.ndtvprofit.com/markets",
-    "Business Today": "https://www.businesstoday.in/markets",
-    "Business Standard": "https://www.business-standard.com/markets/news",
-    "Economic Times": "https://economictimes.indiatimes.com/markets",
-    "ET Now": "https://www.etnownews.com/markets",
-    "CNBC TV18": "https://www.cnbctv18.com/market/",
-    "Zee Business": "https://www.zeebiz.com/markets",
-    "Financial Express": "https://www.financialexpress.com/market/",
-    "Hindu BusinessLine": "https://www.thehindubusinessline.com/markets/",
-    "Good Returns": "https://www.goodreturns.in/news/",
-    "India Infoline": "https://www.indiainfoline.com/markets/news",
-    "DSIJ": "https://www.dsij.in/market-news"
-}
+# ================= URL FILTER ================= #
 
-# ================= LIVEMINT ================= #
+def looks_like_article(url):
+    if "share-price" in url.lower():
+        return False
 
-LIVEMINT_BASE = "https://www.livemint.com"
-LIVEMINT_SECTION = "https://www.livemint.com/market/stock-market-news"
-LIVEMINT_PAGES = 5
+    return bool(re.search(r"-\d{6,}(_\d+)?\.html$", url)) or \
+           bool(re.search(r"/articleshow/\d{6,}\.cms$", url))
 
-# ================= MONEYCONTROL ================= #
+# ================= DATE EXTRACTION ================= #
 
-MONEYCONTROL_SECTIONS = [
-    "https://www.moneycontrol.com/news/business/markets/",
-    "https://www.moneycontrol.com/technology/"
-]
-MONEYCONTROL_PAGES = 3
-
-# ================= HELPERS ================= #
-
-def generate_aliases(entity):
-    base = entity.lower().strip()
-    return {
-        base,
-        f"{base} ltd",
-        f"{base} limited",
-        base.replace("securities", "sec"),
-        base.split()[0]
-    }
-
-def extract_article(url):
-    try:
-        article = Article(url)
-        article.download()
-        article.parse()
-        if article.text and len(article.text) >= MIN_BODY_LENGTH:
-            return article.title or "", article.text
-    except Exception:
-        pass
-
-    try:
-        r = requests.get(url, headers=HEADERS, timeout=10)
-        soup = BeautifulSoup(r.text, "lxml")
-
-        title = soup.title.string.strip() if soup.title else ""
-
-        paragraphs = [p.get_text(" ", strip=True) for p in soup.find_all("p")]
-        body = " ".join(paragraphs)
-        if len(body) >= MIN_BODY_LENGTH:
-            return title, body
-
-        for script in soup.find_all("script", {"type": "application/ld+json"}):
-            try:
-                data = json.loads(script.string)
-                if isinstance(data, dict):
-                    if data.get("articleBody"):
-                        return title, data["articleBody"]
-            except Exception:
-                continue
-
-        return title, None
-    except Exception:
-        return None, None
-
-def entity_mentioned(text, aliases):
-    t = text.lower()
-    return any(a in t for a in aliases)
-
-def meaningful_context(text):
-    t = text.lower()
-    return any(k in t for k in ENTITY_KEYWORDS)
-
-def is_blocked(text):
-    t = text.lower()
-    return any(b in t for b in BLOCK_TERMS)
-
-def extract_key_sentences(text, aliases):
-    if not text:
-        return []
-    sentences = re.split(r'[.!?]', text)
-    return [
-        s.strip()
-        for s in sentences
-        if any(a in s.lower() for a in aliases) and meaningful_context(s.lower())
-    ]
-
-def classify_article(title, body):
-    text = (title + " " + (body or "")).lower()
-    if "stocks to buy" in text or "top picks" in text:
-        return "broker_recommendation"
-    if any(k in text for k in ["rating", "target price", "upside", "coverage"]):
-        return "broker_opinion"
-    if any(k in text for k in ["says", "said", "according to", "as per"]):
-        return "broker_quote"
-    return "broker_mention"
-
-def write_json(record):
-    with open(OUTPUT_FILE, "a", encoding="utf-8") as f:
-        f.write(json.dumps(record, ensure_ascii=False) + "\n")
-        f.flush()
-
-# ================= MONEYCONTROL LOGIC ================= #
-
-def extract_moneycontrol_date(soup):
-    span = soup.select_one("div.article_schedule span")
-    if not span:
-        return None
-    try:
-        return datetime.strptime(span.get_text(strip=True), "%B %d, %Y").date()
-    except Exception:
-        return None
-
-def collect_moneycontrol_links():
-    urls = set()
-    for section in MONEYCONTROL_SECTIONS:
-        for page in range(1, MONEYCONTROL_PAGES + 1):
-            page_url = section if page == 1 else f"{section}page-{page}/"
-            print(f"🔎 Moneycontrol: {page_url}")
-            try:
-                r = requests.get(page_url, headers=HEADERS, timeout=10)
-                soup = BeautifulSoup(r.text, "lxml")
-                for a in soup.find_all("a", href=True):
-                    href = a["href"]
-                    if href.startswith("/"):
-                        href = urljoin(section, href)
-                    if re.match(r"^https://www\.moneycontrol\.com/.+-\d+\.html$", href):
-                        urls.add(href)
-            except Exception:
-                continue
-    return list(urls)
-
-def process_moneycontrol(entity):
-    aliases = generate_aliases(entity)
-    today = datetime.now().date()
-
-    urls = collect_moneycontrol_links()
-
-    for url in urls:
+def extract_publish_date(soup):
+    # JSON-LD
+    for script in soup.find_all("script", type="application/ld+json"):
         try:
-            r = requests.get(url, headers=HEADERS, timeout=10)
-            soup = BeautifulSoup(r.text, "lxml")
-
-            publish_date = extract_moneycontrol_date(soup)
-            if publish_date != today:
-                continue
-
-            title, body = extract_article(url)
-            combined = (title or "") + " " + (body or "")
-
-            if is_blocked(combined):
-                continue
-            if not entity_mentioned(combined, aliases):
-                continue
-            if not meaningful_context(combined):
-                continue
-
-            sentences = extract_key_sentences(body, aliases)
-            if not sentences:
-                sentences = extract_key_sentences(title, aliases)
-
-            record = {
-                "entity": entity,
-                "headline": title,
-                "publication": "Moneycontrol",
-                "article_type": classify_article(title, body),
-                "content_quality": "full_body" if body else "headline_only",
-                "key_sentences": sentences[:3],
-                "url": url,
-                "collected_at": datetime.now(timezone.utc).isoformat()
-            }
-
-            write_json(record)
-            print(f"✅ [Moneycontrol] {title}")
-            time.sleep(REQUEST_DELAY)
-
-        except Exception:
+            data = json.loads(script.string)
+            if isinstance(data, dict) and "datePublished" in data:
+                return date_parser.parse(data["datePublished"])
+        except:
             continue
 
-# ================= LIVEMINT ================= #
+    # Standard meta
+    meta = soup.find("meta", {"property": "article:published_time"})
+    if meta and meta.get("content"):
+        return date_parser.parse(meta["content"])
 
-def collect_livemint_links():
-    urls = []
-    for page in range(1, LIVEMINT_PAGES + 1):
-        page_url = LIVEMINT_SECTION if page == 1 else f"{LIVEMINT_SECTION}/page-{page}"
-        print(f"🔎 LiveMint: {page_url}")
+    # Business Standard fallback
+    meta2 = soup.find("meta", {"itemprop": "datePublished"})
+    if meta2 and meta2.get("content"):
+        return date_parser.parse(meta2["content"])
+
+    # Time tag
+    time_tag = soup.find("time")
+    if time_tag:
         try:
-            r = requests.get(page_url, headers=HEADERS, timeout=10)
-            soup = BeautifulSoup(r.text, "lxml")
-            for a in soup.find_all("a", href=True):
-                href = a["href"]
-                if href.startswith("/market/stock-market-news/"):
-                    full_url = urljoin(LIVEMINT_BASE, href)
-                    if full_url not in urls:
-                        urls.append(full_url)
-        except Exception:
-            continue
-    return urls
+            if time_tag.get("datetime"):
+                return date_parser.parse(time_tag["datetime"])
+            else:
+                return date_parser.parse(time_tag.get_text())
+        except:
+            pass
 
-# ================= GENERIC ================= #
+    return None
 
-def collect_generic_links():
-    urls = []
-    for _, page_url in GENERIC_SOURCES.items():
-        try:
-            r = requests.get(page_url, headers=HEADERS, timeout=10)
-            soup = BeautifulSoup(r.text, "lxml")
-            for a in soup.find_all("a", href=True):
-                href = a["href"]
-                if href.startswith("/"):
-                    href = urljoin(page_url, href)
-                if href.startswith("http") and href not in urls:
-                    urls.append(href)
-        except Exception:
-            continue
-    return urls[:MAX_GENERIC_ARTICLES]
+# ================= PROCESS ARTICLE ================= #
 
-def process_urls(entity, urls, publication):
-    aliases = generate_aliases(entity)
-    for url in urls:
-        title, body = extract_article(url)
-        if not title:
-            continue
+def process_article(url, listing_domain):
 
-        combined = title + " " + (body or "")
+    print(f"\n🔎 CHECKING: {url}")
 
-        if is_blocked(combined):
-            continue
-        if not entity_mentioned(combined, aliases):
-            continue
-        if not meaningful_context(combined):
-            continue
+    if url in visited_urls:
+        print("⛔ Already visited")
+        return
 
-        sentences = extract_key_sentences(body, aliases)
-        if not sentences:
-            sentences = extract_key_sentences(title, aliases)
+    visited_urls.add(url)
+
+    parsed = urlparse(url)
+
+    # Domain enforcement
+    if parsed.netloc != listing_domain:
+        print(f"⛔ Domain mismatch ({parsed.netloc} != {listing_domain})")
+        return
+    else:
+        print("✔ Domain OK")
+
+    try:
+        r = requests.get(url, headers=HEADERS, timeout=20)
+        r.raise_for_status()
+        soup = BeautifulSoup(r.text, "html.parser")
+
+        publish_date = extract_publish_date(soup)
+
+        if publish_date:
+            publish_date_ist = publish_date.astimezone(IST).date()
+            print(f"🕒 Publish Date: {publish_date_ist}")
+
+            if publish_date_ist != TODAY_IST:
+                print("⛔ SKIP — Not Today")
+                return
+            else:
+                print("✔ Today Match")
+        else:
+            print("⚠ No publish date found — allowing")
+
+        for tag in soup(["script", "style", "noscript"]):
+            tag.decompose()
+
+        full_text = soup.get_text(" ", strip=True)
+
+        if not ENTITY_REGEX.search(full_text):
+            print("⛔ SKIP — Entity not found")
+            return
+        else:
+            print("✔ Entity Found")
 
         record = {
-            "entity": entity,
-            "headline": title,
-            "publication": publication,
-            "article_type": classify_article(title, body),
-            "content_quality": "full_body" if body else "headline_only",
-            "key_sentences": sentences[:3],
+            "entity": ENTITY_NAME,
             "url": url,
-            "collected_at": datetime.now(timezone.utc).isoformat()
+            "publish_date": publish_date.isoformat() if publish_date else None,
+            "collected_at": datetime.now(timezone.utc).isoformat(),
+            "text_preview": full_text[:500]
         }
 
-        write_json(record)
-        print(f"✅ [{publication}] {title}")
+        with open(OUTPUT_FILE, "a", encoding="utf-8") as f:
+            f.write(json.dumps(record, ensure_ascii=False) + "\n")
+
+        print("✅ SAVED")
+
         time.sleep(REQUEST_DELAY)
+
+    except Exception as e:
+        print(f"⚠ Article Error: {e}")
+
+# ================= LISTING SCAN ================= #
+
+def scan_listing(listing_url):
+
+    print(f"\n📄 Scanning listing: {listing_url}")
+
+    listing_domain = urlparse(listing_url).netloc
+
+    try:
+        r = requests.get(listing_url, headers=HEADERS, timeout=20)
+        r.raise_for_status()
+        soup = BeautifulSoup(r.text, "html.parser")
+
+        for a in soup.find_all("a", href=True):
+
+            href = a["href"].strip()
+            href = urljoin(listing_url, href)
+            href, _ = urldefrag(href)
+
+            if not looks_like_article(href):
+                continue
+
+            print(f"➡ Candidate: {href}")
+
+            process_article(href, listing_domain)
+
+    except Exception as e:
+        print(f"⚠ Listing Error: {e}")
 
 # ================= MAIN ================= #
 
-def run(entity):
-    print(f"\n🚀 Entity Intelligence Run: {entity}\n")
+def run():
+    print("\n🚀 FULL DEBUG SCRAPER STARTED\n")
 
-    # 1️⃣ Moneycontrol (TODAY ONLY)
-    process_moneycontrol(entity)
+    with open(OUTPUT_FILE, "w", encoding="utf-8"):
+        pass
 
-    # 2️⃣ LiveMint
-    livemint_urls = collect_livemint_links()
-    process_urls(entity, livemint_urls, "LiveMint")
+    # Moneycontrol pagination
+    for page in range(1, MAX_MONEYCONTROL_PAGES + 1):
+        page_url = MONEYCONTROL_BASE if page == 1 else f"{MONEYCONTROL_BASE}page-{page}/"
+        scan_listing(page_url)
 
-    # 3️⃣ Other publications
-    generic_urls = collect_generic_links()
-    process_urls(entity, generic_urls, "Other")
+    # Other strict URLs
+    for listing in STRICT_LISTING_URLS:
+        scan_listing(listing)
 
-    print("\n✅ Entity intelligence run complete")
-
-# ================= RUN ================= #
+    print("\n✅ DEBUG RUN COMPLETE")
 
 if __name__ == "__main__":
-    entity = input("Enter entity name: ").strip()
-    run(entity)
+    run()

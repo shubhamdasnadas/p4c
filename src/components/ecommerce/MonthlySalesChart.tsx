@@ -17,7 +17,8 @@ const MONTHS = [
 ];
 
 type Article = {
-  headline?: string;
+  headline?: string;          // ✅ kept (not removed)
+  text_preview?: string;      // ✅ ADDED (important)
   publication?: string;
   collected_at?: string;
   url?: string;
@@ -36,7 +37,6 @@ export default function MonthlySalesChart() {
         headers: {
           'Content-Type': 'application/json',
         },
-        // If you want to send dynamic data, add 'body: JSON.stringify(data)'
       });
 
       const data = await response.json();
@@ -53,13 +53,13 @@ export default function MonthlySalesChart() {
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     createRecord();
-  },[])
+  }, []);
 
   /* ========= READ FILE DIRECTLY ========= */
   useEffect(() => {
-    fetch("/entity_intelligence_live_results.jsonl")
+    fetch("/entity_today_results.jsonl")
       .then((res) => {
         if (!res.ok) throw new Error("File not found in /public");
         return res.text();
@@ -104,6 +104,7 @@ export default function MonthlySalesChart() {
 
     articles.forEach((a) => {
       if (!a.collected_at) return;
+
       if (
         selectedPublication === "All" ||
         a.publication === selectedPublication
@@ -189,7 +190,7 @@ export default function MonthlySalesChart() {
           )
           .map(([publication, news]) => (
             <div key={publication} className="border rounded-xl overflow-hidden">
-              {/* Accordion Header */}
+
               <button
                 onClick={() =>
                   setOpenAccordion(
@@ -206,19 +207,24 @@ export default function MonthlySalesChart() {
                 </span>
               </button>
 
-              {/* Accordion Body */}
               {openAccordion === publication && (
                 <div className="divide-y">
                   {news.map((item, idx) => (
                     <div key={idx} className="px-4 py-3 text-sm">
+
+                      {/* ✅ USE text_preview but keep fallback logic */}
                       <div className="font-medium">
-                        {item.headline || "No headline"}
+                        {item.text_preview
+                          ? item.text_preview.slice(0, 140) + "..."
+                          : item.headline || "No headline"}
                       </div>
+
                       <div className="text-xs text-gray-500 mt-1">
                         {item.collected_at
                           ? new Date(item.collected_at).toLocaleString()
                           : "Unknown date"}
                       </div>
+
                     </div>
                   ))}
                 </div>
