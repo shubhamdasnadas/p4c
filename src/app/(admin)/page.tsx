@@ -48,7 +48,7 @@
 import type { Metadata } from "next";
 import React from "react";
 import MonthlySalesChart from "@/components/ecommerce/MonthlySalesChart";
-// import Demo from "@/components/ecommerce/Demo";
+import Demo from "@/components/ecommerce/Demo";
 
 export const metadata: Metadata = {
   title: "Next.js E-commerce Dashboard | TailAdmin - Next.js Dashboard Template",
