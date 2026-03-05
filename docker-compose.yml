@@ -12,7 +12,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - MONGODB_URI=mongodb://192.168.9.134:27017/my_database
+      - MONGODB_URI=mongodb://192.168.9.89:27017/my_database
     depends_on:
       - mongodb
 
