@@ -1,231 +1,155 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { useEffect, useMemo, useState } from "react";
-import { MoreDotIcon } from "@/icons";
-import { Dropdown } from "../ui/dropdown/Dropdown";
-import { DropdownItem } from "../ui/dropdown/DropdownItem";
-import { ApexOptions } from "apexcharts";
-
-const ReactApexChart = dynamic(() => import("react-apexcharts"), {
-  ssr: false,
-});
-
-const MONTHS = [
-  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-];
-
-type Article = {
-  headline?: string;
-  publication?: string;
-  collected_at?: string;
-  url?: string;
-};
+import { useEffect, useState } from "react";
 
 export default function MonthlySalesChart() {
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [selectedPublication, setSelectedPublication] = useState("All");
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [openAccordion, setOpenAccordion] = useState<string | null>(null);
 
-  const createRecord = async () => {
-    try {
-      const response = await fetch('/api/test', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        // If you want to send dynamic data, add 'body: JSON.stringify(data)'
+  const [keywords, setKeywords] = useState([
+    // "ICICI Securities",
+    // "Geojit Financial",
+    "Kotak Securities"
+  ]);
+
+  const [news, setNews] = useState<any[]>([]);
+  const [open, setOpen] = useState<string | null>(null);
+
+
+  useEffect(() => {
+
+    const query = keywords.join(",");
+
+    setNews([]); // reset old data
+
+    fetch(
+      `/api/opoint-news?keywords=${encodeURIComponent(query)}`,
+      { cache: "no-store" }
+    )
+      .then(res => res.json())
+      .then(data => {
+
+        console.log("TWINGLY", data);
+
+        setNews(data.articles || []);
+
       });
 
-      const data = await response.json();
+  }, [keywords]); // ✅ important
 
-      if (!response.ok) {
-        throw new Error(data.error || 'Something went wrong');
-      }
 
-      console.log('Success! Inserted ID:', data.id);
-      return data;
-    } catch (error) {
-      console.error('Failed to create record:', error);
-      throw error;
-    }
-  };
+  const getNewsByKeyword = (keyword: string) => {
 
-  useEffect(()=>{
-    createRecord();
-  },[])
+    if (keywords.length === 1) return news;
 
-  /* ========= READ FILE DIRECTLY ========= */
-  useEffect(() => {
-    fetch("/entity_intelligence_live_results.jsonl")
-      .then((res) => {
-        if (!res.ok) throw new Error("File not found in /public");
-        return res.text();
-      })
-      .then((text) => {
-        const rows = text
-          .split("\n")
-          .filter(Boolean)
-          .map((line) => {
-            try {
-              return JSON.parse(line);
-            } catch {
-              return null;
-            }
-          })
-          .filter(Boolean) as Article[];
+    const words = keyword.toLowerCase().split(" ");
 
-        setArticles(rows);
-      })
-      .catch(console.error);
-  }, []);
+    return news.filter(n => {
 
-  /* ========= GROUP BY PUBLICATION ========= */
-  const groupedByPublication = useMemo(() => {
-    const map: Record<string, Article[]> = {};
-    articles.forEach((a) => {
-      const key = a.publication || "Unknown";
-      if (!map[key]) map[key] = [];
-      map[key].push(a);
-    });
-    return map;
-  }, [articles]);
+      const text =
+        (n.title || "") +
+        " " +
+        (n.text || "");
 
-  /* ========= PUBLICATIONS ========= */
-  const publications = useMemo(() => {
-    return ["All", ...Object.keys(groupedByPublication)];
-  }, [groupedByPublication]);
+      return words.some(w =>
+        text.toLowerCase().includes(w)
+      );
 
-  /* ========= MONTHLY COUNTS (Chart) ========= */
-  const monthlyData = useMemo(() => {
-    const counts = Array(12).fill(0);
-
-    articles.forEach((a) => {
-      if (!a.collected_at) return;
-      if (
-        selectedPublication === "All" ||
-        a.publication === selectedPublication
-      ) {
-        const d = new Date(a.collected_at);
-        if (!isNaN(d.getTime())) {
-          counts[d.getMonth()]++;
-        }
-      }
     });
 
-    return counts;
-  }, [articles, selectedPublication]);
-
-  const options: ApexOptions = {
-    chart: {
-      type: "bar",
-      toolbar: { show: false },
-      fontFamily: "Outfit, sans-serif",
-    },
-    colors: ["#465fff"],
-    plotOptions: {
-      bar: { columnWidth: "40%", borderRadius: 6 },
-    },
-    dataLabels: { enabled: false },
-    xaxis: { categories: MONTHS },
-    yaxis: { title: { text: "Articles" } },
   };
 
-  const series = [
-    {
-      name: selectedPublication,
-      data: monthlyData,
-    },
-  ];
 
   return (
-    <div className="rounded-2xl border bg-white p-5 space-y-6">
 
-      {/* ===== HEADER ===== */}
-      <div className="flex justify-between items-center">
-        <h3 className="text-lg font-semibold">Articles Intelligence</h3>
+    <div className="rounded-2xl border bg-white p-5 space-y-4">
 
-        <div className="relative">
-          <button onClick={() => setDropdownOpen(!dropdownOpen)}>
-            <MoreDotIcon />
-          </button>
+      <h2 className="text-lg font-bold">
+        Stock News (Twingly)
+      </h2>
 
-          <Dropdown
-            isOpen={dropdownOpen}
-            onClose={() => setDropdownOpen(false)}
-            className="w-48 p-2"
-          >
-            {publications.map((pub) => (
-              <DropdownItem
-                key={pub}
-                onItemClick={() => {
-                  setSelectedPublication(pub);
-                  setDropdownOpen(false);
-                }}
-              >
-                {pub}
-              </DropdownItem>
-            ))}
-          </Dropdown>
-        </div>
-      </div>
 
-      {/* ===== CHART ===== */}
-      <ReactApexChart
-        options={options}
-        series={series}
-        type="bar"
-        height={180}
-      />
+      {keywords.map(keyword => {
 
-      {/* ===== ACCORDION ===== */}
-      <div className="space-y-3">
-        {Object.entries(groupedByPublication)
-          .filter(
-            ([pub]) =>
-              selectedPublication === "All" || pub === selectedPublication
-          )
-          .map(([publication, news]) => (
-            <div key={publication} className="border rounded-xl overflow-hidden">
-              {/* Accordion Header */}
-              <button
-                onClick={() =>
-                  setOpenAccordion(
-                    openAccordion === publication ? null : publication
-                  )
-                }
-                className="w-full flex justify-between items-center px-4 py-3 bg-gray-50 hover:bg-gray-100"
-              >
-                <span className="font-semibold">
-                  {publication} ({news.length})
-                </span>
-                <span className="text-xl">
-                  {openAccordion === publication ? "▲" : "▼"}
-                </span>
-              </button>
+        const list = getNewsByKeyword(keyword);
 
-              {/* Accordion Body */}
-              {openAccordion === publication && (
-                <div className="divide-y">
-                  {news.map((item, idx) => (
-                    <div key={idx} className="px-4 py-3 text-sm">
-                      <div className="font-medium">
-                        {item.headline || "No headline"}
-                      </div>
-                      <div className="text-xs text-gray-500 mt-1">
-                        {item.collected_at
-                          ? new Date(item.collected_at).toLocaleString()
-                          : "Unknown date"}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
+        return (
+
+          <div key={keyword} className="border rounded-lg">
+
+            <div
+              onClick={() =>
+                setOpen(
+                  open === keyword
+                    ? null
+                    : keyword
+                )
+              }
+              className="cursor-pointer bg-gray-100 px-4 py-3 font-semibold flex justify-between"
+            >
+              {keyword}
+              <span>
+                {open === keyword ? "−" : "+"}
+              </span>
             </div>
-          ))}
-      </div>
+
+
+            {open === keyword && (
+
+              <div className="p-4 space-y-4">
+
+                {list.length === 0 && (
+                  <p>No news found</p>
+                )}
+
+                {list.map((n, i) => (
+
+                  <div
+                    key={i}
+                    className="border rounded-lg p-3 space-y-2"
+                  >
+
+                    <h3 className="text-blue-600 font-semibold">
+                      {n.title}
+                    </h3>
+
+                    <p>
+                      {n.text?.slice(0, 150)}
+                    </p>
+
+                    <p className="text-xs">
+                      Author: {n.author}
+                    </p>
+
+                    <p className="text-xs">
+                      Date:
+                      {n.timestamp &&
+                        new Date(
+                          n.timestamp
+                        ).toLocaleString()}
+                    </p>
+
+                    <a
+                      href={n.url}
+                      target="_blank"
+                      className="px-3 py-1 bg-blue-500 text-white rounded"
+                    >
+                      Read Full Article
+                    </a>
+
+                  </div>
+
+                ))}
+
+              </div>
+
+            )}
+
+          </div>
+
+        );
+
+      })}
+
     </div>
+
   );
 }
