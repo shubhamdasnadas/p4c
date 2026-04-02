@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import ComponentCard from "@/components/common/ComponentCard";
 
 // Available keywords to select from
@@ -39,6 +39,7 @@ export default function NewsTagSelector() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [wildcardActive, setWildcardActive] = useState<boolean>(false);
+  const [selectedArticle, setSelectedArticle] = useState<NewsArticle | null>(null);
 
   const activeDisplayTags = wildcardActive ? AVAILABLE_TAGS : selectedTags;
   const getEffectiveTags = (tags: string[]) => {
@@ -139,6 +140,27 @@ export default function NewsTagSelector() {
     setArticles([]);
   };
 
+  const closeModal = () => {
+    setSelectedArticle(null);
+  };
+
+  // Handle Esc key to close modal
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        closeModal();
+      }
+    };
+
+    if (selectedArticle) {
+      window.addEventListener("keydown", handleEscape);
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, [selectedArticle]);
+
   return (
     <ComponentCard title="News by Interest Tags">
       <div className="space-y-6">
@@ -235,7 +257,8 @@ export default function NewsTagSelector() {
             {articles.map((article, idx) => (
               <article
                 key={idx}
-                className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:shadow-lg transition-shadow"
+                className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer"
+                onClick={() => setSelectedArticle(article)}
               >
                 {/* Image */}
                 {article.image_url && (
@@ -286,6 +309,7 @@ export default function NewsTagSelector() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-block mt-3 text-sm text-blue-600 dark:text-blue-400 hover:underline"
+                    onClick={(e) => e.stopPropagation()}
                   >
                     Read Full Article →
                   </a>
@@ -312,6 +336,67 @@ export default function NewsTagSelector() {
           </div>
         )}
       </div>
+
+      {/* Modal */}
+      {selectedArticle && (
+        <div
+          className="fixed inset-x-0 bottom-0 top-20 z-40 flex items-center justify-center bg-black/50 p-4"
+          onClick={closeModal}
+        >
+          <div
+            className="w-full max-w-2xl border rounded-lg p-6 space-y-2 hover:shadow-md transition bg-white dark:bg-gray-900 max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 className="text-blue-600 dark:text-blue-400 font-semibold text-lg">
+              {selectedArticle.title}
+            </h3>
+
+            {selectedArticle.image_url && (
+              <img
+                src={selectedArticle.image_url}
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).src =
+                    "/no-image.png";
+                }}
+                className="w-full h-56 object-cover rounded"
+                alt="article"
+              />
+            )}
+
+            <p className="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line">
+              {selectedArticle.body || selectedArticle.summary || "No content available."}
+            </p>
+
+            <p className="text-xs text-gray-500 dark:text-gray-400">
+              Source: {selectedArticle.source}
+            </p>
+
+            <p className="text-xs text-gray-400 dark:text-gray-500">
+              {selectedArticle.published_at
+                ? new Date(selectedArticle.published_at).toLocaleString()
+                : "No date"}
+            </p>
+
+            <div className="flex gap-2 pt-1">
+              <a
+                href={selectedArticle.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block px-3 py-1 bg-blue-500 text-white text-sm rounded hover:bg-blue-600"
+              >
+                Read Full Article
+              </a>
+              <button
+                type="button"
+                onClick={closeModal}
+                className="inline-block px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm rounded hover:bg-gray-300 dark:hover:bg-gray-600"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </ComponentCard>
   );
 }

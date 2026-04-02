@@ -15,6 +15,7 @@ type NewsItem = {
 export default function MonthlySalesChart() {
   const [news, setNews] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
 
   // 🔥 Remove <match> tags
   const cleanText = (text: string) => {
@@ -66,6 +67,27 @@ export default function MonthlySalesChart() {
       });
   }, []);
 
+  const closeModal = () => {
+    setSelectedNews(null);
+  };
+
+  // Handle Esc key to close modal
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        closeModal();
+      }
+    };
+
+    if (selectedNews) {
+      window.addEventListener("keydown", handleEscape);
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, [selectedNews]);
+
   return (
     <div className="rounded-2xl border bg-white p-5 space-y-4">
       <h2 className="text-lg font-bold">Latest Headlines</h2>
@@ -83,6 +105,15 @@ export default function MonthlySalesChart() {
         <div
           key={i}
           className="border rounded-lg p-3 space-y-2 hover:shadow-md transition"
+          onClick={() => setSelectedNews(n)}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              setSelectedNews(n);
+            }
+          }}
         >
           <h3 className="text-blue-600 font-semibold">
             {n.title}
@@ -120,11 +151,72 @@ export default function MonthlySalesChart() {
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block px-3 py-1 bg-blue-500 text-white text-sm rounded hover:bg-blue-600"
+            onClick={(e) => e.stopPropagation()}
           >
             Read Full Article
           </a>
         </div>
       ))}
+
+      {selectedNews && (
+        <div
+          className="fixed inset-x-0 bottom-0 top-20 z-40 flex items-center justify-center bg-black/50 p-4"
+          onClick={closeModal}
+        >
+          <div
+            className="w-full max-w-2xl border rounded-lg p-6 space-y-2 hover:shadow-md transition bg-white max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 className="text-blue-600 font-semibold text-lg">
+              {selectedNews.title}
+            </h3>
+
+            {selectedNews.image_url && (
+              <img
+                src={selectedNews.image_url}
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).src =
+                    "/no-image.png";
+                }}
+                className="w-full h-56 object-cover rounded"
+                alt="news"
+              />
+            )}
+
+            <p className="text-sm text-gray-700 whitespace-pre-line">
+              {selectedNews.body || selectedNews.summary || "No passage available."}
+            </p>
+
+            <p className="text-xs text-gray-500">
+              Source: {selectedNews.source}
+            </p>
+
+            <p className="text-xs text-gray-400">
+              {selectedNews.published_at
+                ? new Date(selectedNews.published_at).toLocaleString()
+                : "No date"}
+            </p>
+
+            <div className="flex gap-2 pt-1">
+              <a
+                href={selectedNews.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block px-3 py-1 bg-blue-500 text-white text-sm rounded hover:bg-blue-600"
+              >
+                Read Full Article
+              </a>
+              <button
+                type="button"
+                onClick={closeModal}
+                className="inline-block px-3 py-1 bg-gray-200 text-gray-800 text-sm rounded hover:bg-gray-300"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
