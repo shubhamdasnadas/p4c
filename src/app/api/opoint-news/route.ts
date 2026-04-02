@@ -117,16 +117,16 @@ export async function GET(request: Request) {
     const payload = {
       searchterm: searchQuery,
 
-      params: {
-        requestedarticles: 500,
+    params: {
+  requestedarticles: 100,
 
-        main: {
-          header: 2,
-          summary: 2,
-          text: 2,
-          quotes: 1,
-        },
-      },
+  main: {
+    header: 2,
+    summary: 2,
+    text: 2,
+    matches: true,
+  },
+}
     };
 
     const response = await fetch(BASE_URL, {

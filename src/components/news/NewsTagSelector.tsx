@@ -102,7 +102,7 @@ export default function NewsTagSelector() {
     }
   }, []);
 
-    
+
   // Handle tag selection
   const toggleTag = (tag: string) => {
     if (tag === WILDCARD_TAG) {
@@ -254,10 +254,10 @@ export default function NewsTagSelector() {
                   {article.title}
                 </h4>
 
-                {/* Summary */}
-                {article.summary && (
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-3">
-                    {article.summary}
+                {/* 🔥 Combined Description */}
+                {(article.summary || article.body) && (
+                  <p className="text-sm text-gray-700 dark:text-gray-300 mb-3 line-clamp-4">
+                    {`${article.summary || ""} ${article.body || ""}`.slice(0, 400)}...
                   </p>
                 )}
 
