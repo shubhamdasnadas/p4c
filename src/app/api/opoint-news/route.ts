@@ -37,26 +37,83 @@ function filterTodayIST(documents: any[]) {
 }
 
 // ─── Build Search Query (MULTI KEYWORD) ─────────────────────
+// Supports both combinations and permutations (AND groups joined by OR).
 function buildSearchQuery(keywords: string[]) {
-  return keywords
-    .map((k) =>
-      k.includes(" ") ? `"${k}"` : k
-    )
-    .join(" OR ");
+  const normalize = (k: string) =>
+    k.includes(" ") ? `"${k}"` : k;
+
+  const uniqueClauses = new Set<string>();
+  const n = keywords.length;
+
+  const permute = (arr: string[]): string[][] => {
+    if (arr.length <= 1) return [arr];
+
+    const permutations: string[][] = [];
+    for (let i = 0; i < arr.length; i++) {
+      const current = arr[i];
+      const rest = [...arr.slice(0, i), ...arr.slice(i + 1)];
+
+      for (const sub of permute(rest)) {
+        permutations.push([current, ...sub]);
+      }
+    }
+
+    return permutations;
+  };
+
+  // Build all non-empty combinations, then all permutations within each combination.
+  for (let mask = 1; mask < (1 << n); mask++) {
+    const combo: string[] = [];
+
+    for (let i = 0; i < n; i++) {
+      if (mask & (1 << i)) {
+        combo.push(normalize(keywords[i]));
+      }
+    }
+
+    if (combo.length === 1) {
+      uniqueClauses.add(`(${combo[0]})`);
+      continue;
+    }
+
+    for (const order of permute(combo)) {
+      uniqueClauses.add(`(${order.join(" AND ")})`);
+    }
+  }
+
+  return Array.from(uniqueClauses).join(" OR ");
 }
 
 // ─── API Route Handler ─────────────────────────────────────
-export async function GET() {
+export async function GET(request: Request) {
   try {
-    // 🔥 Multiple Keywords
-    const keywords = [
-      // "ICICI Securities",
-      "Geojit",
-      "जियोजित"
+    // 🔥 Get keywords from query params or use defaults
+    const { searchParams } = new URL(request.url);
+    const keywordParam = searchParams.get("keywords");
+    
+    // Default keywords for fallback
+    const defaultKeywords = [
+      "ICICI Securities",
+      "Motilal Oswal Group",
+      "Groww",
+      // "India Infoline Finance",
+      // "Banking"      
+      // "Geojit",
+      // "जियोजित"
     ];
+    
+    const keywords = keywordParam 
+      ? keywordParam.split(",").map(k => k.trim()).filter(k => k.length > 0)
+      : defaultKeywords;
 
+    // 🟢 build query
     const searchQuery = buildSearchQuery(keywords);
 
+    // 🟢 DEBUG (safe place)
+    console.log("\n=== GENERATED QUERY ===");
+    console.log(searchQuery);
+    console.log("QUERY LENGTH:", searchQuery.length);
+    console.log("=======================\n");
     const payload = {
       searchterm: searchQuery,
 

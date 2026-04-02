@@ -6,6 +6,7 @@ import MonthlySalesChart from "@/components/ecommerce/MonthlySalesChart";
 import StatisticsChart from "@/components/ecommerce/StatisticsChart";
 import RecentOrders from "@/components/ecommerce/RecentOrders";
 import DemographicCard from "@/components/ecommerce/DemographicCard";
+import NewsTagSelector from "@/components/news/NewsTagSelector";
 
 export const metadata: Metadata = {
   title:
@@ -37,6 +38,11 @@ export default function Ecommerce() {
       <div className="col-span-12 xl:col-span-7">
         <RecentOrders />
       </div> */}
+
+      {/* News Tag Selector */}
+      <div className="col-span-12">
+        <NewsTagSelector />
+      </div>
     </div>
   );
 }

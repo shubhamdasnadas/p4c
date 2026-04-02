@@ -1,203 +1,130 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { useEffect, useMemo, useState } from "react";
-import { MoreDotIcon } from "@/icons";
-import { Dropdown } from "../ui/dropdown/Dropdown";
-import { DropdownItem } from "../ui/dropdown/DropdownItem";
-import { ApexOptions } from "apexcharts";
+import { useEffect, useState } from "react";
 
-const ReactApexChart = dynamic(() => import("react-apexcharts"), {
-  ssr: false,
-});
-
-const MONTHS = [
-  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-];
-
-type Article = {
-  headline?: string;
-  publication?: string;
-  collected_at?: string;
-  url?: string;
+type NewsItem = {
+  title: string;
+  summary: string;
+  body: string;
+  image_url: string;
+  source: string;
+  published_at: number | null;
+  url: string;
 };
 
 export default function MonthlySalesChart() {
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [selectedPublication, setSelectedPublication] = useState("All");
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [openAccordion, setOpenAccordion] = useState<string | null>(null);
+  const [news, setNews] = useState<NewsItem[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  /* ========= READ FILE DIRECTLY ========= */
-  useEffect(() => {
-    fetch("/entity_intelligence_live_results.jsonl")
-      .then((res) => {
-        if (!res.ok) throw new Error("File not found in /public");
-        return res.text();
-      })
-      .then((text) => {
-        const rows = text
-          .split("\n")
-          .filter(Boolean)
-          .map((line) => {
-            try {
-              return JSON.parse(line);
-            } catch {
-              return null;
-            }
-          })
-          .filter(Boolean) as Article[];
-
-        setArticles(rows);
-      })
-      .catch(console.error);
-  }, []);
-
-  /* ========= GROUP BY PUBLICATION ========= */
-  const groupedByPublication = useMemo(() => {
-    const map: Record<string, Article[]> = {};
-    articles.forEach((a) => {
-      const key = a.publication || "Unknown";
-      if (!map[key]) map[key] = [];
-      map[key].push(a);
-    });
-    return map;
-  }, [articles]);
-
-  /* ========= PUBLICATIONS ========= */
-  const publications = useMemo(() => {
-    return ["All", ...Object.keys(groupedByPublication)];
-  }, [groupedByPublication]);
-
-  /* ========= MONTHLY COUNTS (Chart) ========= */
-  const monthlyData = useMemo(() => {
-    const counts = Array(12).fill(0);
-
-    articles.forEach((a) => {
-      if (!a.collected_at) return;
-      if (
-        selectedPublication === "All" ||
-        a.publication === selectedPublication
-      ) {
-        const d = new Date(a.collected_at);
-        if (!isNaN(d.getTime())) {
-          counts[d.getMonth()]++;
-        }
-      }
-    });
-
-    return counts;
-  }, [articles, selectedPublication]);
-
-  const options: ApexOptions = {
-    chart: {
-      type: "bar",
-      toolbar: { show: false },
-      fontFamily: "Outfit, sans-serif",
-    },
-    colors: ["#465fff"],
-    plotOptions: {
-      bar: { columnWidth: "40%", borderRadius: 6 },
-    },
-    dataLabels: { enabled: false },
-    xaxis: { categories: MONTHS },
-    yaxis: { title: { text: "Articles" } },
+  // 🔥 Remove <match> tags
+  const cleanText = (text: string) => {
+    if (!text) return "";
+    return text.replace(/<[^>]+>/g, "");
   };
 
-  const series = [
-    {
-      name: selectedPublication,
-      data: monthlyData,
-    },
-  ];
+  useEffect(() => {
+    fetch("/api/opoint-news", {
+      cache: "no-store",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("FINAL NEWS", data);
+
+        const formatted: NewsItem[] = (data.articles || []).map(
+          (item: any) => ({
+            title: cleanText(item?.title || "No title"),
+            summary: cleanText(item?.summary || ""),
+            body: cleanText(item?.body || ""),
+            image_url: item?.image_url || "",
+            source: item?.source || "Unknown",
+            published_at: item?.published_at || null,
+            url: item?.url || "#",
+          })
+        );
+
+        // ✅ Remove empty titles
+        const filtered = formatted.filter(
+          (item) => item.title && item.title !== "No title"
+        );
+
+        // ✅ Remove duplicates
+        const unique = Array.from(
+          new Map(filtered.map((item) => [item.title, item])).values()
+        );
+
+        // ✅ Sort latest first
+        unique.sort(
+          (a, b) => (b.published_at || 0) - (a.published_at || 0)
+        );
+
+        setNews(unique);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching news:", err);
+        setLoading(false);
+      });
+  }, []);
 
   return (
-    <div className="rounded-2xl border bg-white p-5 space-y-6">
+    <div className="rounded-2xl border bg-white p-5 space-y-4">
+      <h2 className="text-lg font-bold">Latest Headlines</h2>
 
-      {/* ===== HEADER ===== */}
-      <div className="flex justify-between items-center">
-        <h3 className="text-lg font-semibold">Articles Intelligence</h3>
+      {/* ✅ Loading */}
+      {loading && <p>Loading news...</p>}
 
-        <div className="relative">
-          <button onClick={() => setDropdownOpen(!dropdownOpen)}>
-            <MoreDotIcon />
-          </button>
+      {/* ❌ No Data */}
+      {!loading && news.length === 0 && (
+        <p>No news found</p>
+      )}
 
-          <Dropdown
-            isOpen={dropdownOpen}
-            onClose={() => setDropdownOpen(false)}
-            className="w-48 p-2"
+      {/* ✅ News List */}
+      {news.map((n, i) => (
+        <div
+          key={i}
+          className="border rounded-lg p-3 space-y-2 hover:shadow-md transition"
+        >
+          <h3 className="text-blue-600 font-semibold">
+            {n.title}
+          </h3>
+
+          {/* ✅ Image with fallback */}
+          {n.image_url && (
+            <img
+              src={n.image_url}
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src =
+                  "/no-image.png";
+              }}
+              className="w-full h-40 object-cover rounded"
+              alt="news"
+            />
+          )}
+
+          <p className="text-sm text-gray-700">
+            {n.summary.slice(0, 200)}...
+          </p>
+
+          <p className="text-xs text-gray-500">
+            Source: {n.source}
+          </p>
+
+          <p className="text-xs text-gray-400">
+            {n.published_at
+              ? new Date(n.published_at).toLocaleString()
+              : "No date"}
+          </p>
+
+          <a
+            href={n.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-3 py-1 bg-blue-500 text-white text-sm rounded hover:bg-blue-600"
           >
-            {publications.map((pub) => (
-              <DropdownItem
-                key={pub}
-                onItemClick={() => {
-                  setSelectedPublication(pub);
-                  setDropdownOpen(false);
-                }}
-              >
-                {pub}
-              </DropdownItem>
-            ))}
-          </Dropdown>
+            Read Full Article
+          </a>
         </div>
-      </div>
-
-      {/* ===== CHART ===== */}
-      <ReactApexChart
-        options={options}
-        series={series}
-        type="bar"
-        height={180}
-      />
-
-      {/* ===== ACCORDION ===== */}
-      <div className="space-y-3">
-        {Object.entries(groupedByPublication)
-          .filter(
-            ([pub]) =>
-              selectedPublication === "All" || pub === selectedPublication
-          )
-          .map(([publication, news]) => (
-            <div key={publication} className="border rounded-xl overflow-hidden">
-              {/* Accordion Header */}
-              <button
-                onClick={() =>
-                  setOpenAccordion(
-                    openAccordion === publication ? null : publication
-                  )
-                }
-                className="w-full flex justify-between items-center px-4 py-3 bg-gray-50 hover:bg-gray-100"
-              >
-                <span className="font-semibold">
-                  {publication} ({news.length})
-                </span>
-                <span className="text-xl">
-                  {openAccordion === publication ? "▲" : "▼"}
-                </span>
-              </button>
-
-              {/* Accordion Body */}
-              {openAccordion === publication && (
-                <div className="divide-y">
-                  {news.map((item, idx) => (
-                    <div key={idx} className="px-4 py-3 text-sm">
-                      <div className="font-medium">
-                        {item.headline || "No headline"}
-                      </div>
-                      <div className="text-xs text-gray-500 mt-1">
-                        {item.collected_at
-                          ? new Date(item.collected_at).toLocaleString()
-                          : "Unknown date"}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-      </div>
+      ))}
     </div>
   );
 }
