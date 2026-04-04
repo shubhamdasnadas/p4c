@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import redis from "../../../../lib/redis";
 
 // ─── Configuration ─────────────────────────────────────────
 const API_TOKEN = "070e1d57bb0817a34d5d62a4c58a20eee85a3a30";
@@ -87,46 +88,53 @@ function buildSearchQuery(keywords: string[]) {
 // ─── API Route Handler ─────────────────────────────────────
 export async function GET(request: Request) {
   try {
-    // 🔥 Get keywords from query params or use defaults
     const { searchParams } = new URL(request.url);
+
+    // 🟢 GET PARAMS
     const keywordParam = searchParams.get("keywords");
-    
-    // Default keywords for fallback
+
     const defaultKeywords = [
       "ICICI Securities",
       "Motilal Oswal Group",
       "Groww",
-      // "India Infoline Finance",
-      // "Banking"      
-      // "Geojit",
-      // "जियोजित"
     ];
-    
-    const keywords = keywordParam 
-      ? keywordParam.split(",").map(k => k.trim()).filter(k => k.length > 0)
+
+    // 🟢 FINAL KEYWORDS
+    const keywords = keywordParam
+      ? keywordParam.split(",").map(k => k.trim()).filter(Boolean)
       : defaultKeywords;
 
-    // 🟢 build query
+    // 🟢 NORMALIZED CACHE KEY
+    const cacheKey = `news:${[...keywords].sort().join(",")}`;
+
+    // 🟡 CHECK CACHE FIRST
+    const cached = await redis.get(cacheKey);
+
+    if (cached) {
+      console.log("⚡ CACHE HIT:", cacheKey);
+
+      return new Response(cached, {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    console.log("🐢 CACHE MISS:", cacheKey);
+
+    // ───────── REAL API CALL ─────────
     const searchQuery = buildSearchQuery(keywords);
 
-    // 🟢 DEBUG (safe place)
-    console.log("\n=== GENERATED QUERY ===");
-    console.log(searchQuery);
-    console.log("QUERY LENGTH:", searchQuery.length);
-    console.log("=======================\n");
     const payload = {
       searchterm: searchQuery,
-
-    params: {
-  requestedarticles: 100,
-
-  main: {
-    header: 2,
-    summary: 2,
-    text: 2,
-    matches: true,
-  },
-}
+      params: {
+        requestedarticles: 100,
+        main: {
+          header: 2,
+          summary: 2,
+          text: 2,
+          matches: true,
+        },
+      },
     };
 
     const response = await fetch(BASE_URL, {
@@ -144,51 +152,43 @@ export async function GET(request: Request) {
 
     const todayDocs = filterTodayIST(documents);
 
-    // 🔥 Transform response for frontend
     const formatted = todayDocs.map((doc: any) => ({
-      title:
-        doc?.linkheader?.text ||
-        doc?.header?.text ||
-        "No title",
-
-      summary:
-        doc?.linksummary?.text ||
-        doc?.summary?.text ||
-        "",
-
-      body:
-        doc?.linkbody?.text ||
-        doc?.body?.text ||
-        "",
-
+      title: doc?.linkheader?.text || doc?.header?.text || "No title",
+      summary: doc?.linksummary?.text || doc?.summary?.text || "",
+      body: doc?.linkbody?.text || doc?.body?.text || "",
       source: doc?.first_source?.name || "Unknown",
-
       published_at: doc?.unix_timestamp
         ? doc.unix_timestamp * 1000
         : null,
-
       url: doc?.url,
-
-      image_url:
-        doc?.articleimages?.articleimage?.[0]?.url || "",
-
+      image_url: doc?.articleimages?.articleimage?.[0]?.url || "",
       matches: doc?.linkmatches || [],
     }));
 
-    // ✅ Remove duplicates (by title)
     const unique = Array.from(
       new Map(formatted.map((item) => [item.title, item])).values()
     );
 
-    return NextResponse.json({
+    const finalResponse = {
       total: documents.length,
       todayCount: unique.length,
       articles: unique,
       keywordsUsed: keywords,
+    };
+
+    const json = JSON.stringify(finalResponse);
+
+    // 🟢 SAVE TO REDIS (TTL 60 sec)
+    await redis.set(cacheKey, json, "EX", 60);
+
+    return new Response(json, {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
     });
+
   } catch (error: any) {
-    return NextResponse.json(
-      { error: error.message || "Something went wrong" },
+    return new Response(
+      JSON.stringify({ error: error.message || "Something went wrong" }),
       { status: 500 }
     );
   }
