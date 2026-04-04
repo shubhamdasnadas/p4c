@@ -1,12 +1,15 @@
 import { NextResponse } from "next/server";
 import redis from "../../../../lib/redis";
 
+console.log("Redis ping:", await redis.ping());
+ 
+
 // ─── Configuration ─────────────────────────────────────────
-const API_TOKEN = "070e1d57bb0817a34d5d62a4c58a20eee85a3a30";
-const BASE_URL = "https://api.opoint.com/search/";
+const processenvAPI_TOKEN = process.env.API_TOKEN;
+const processenvBASE_URL = process.env.BASE_URL || "https://api.opoint.com/search/";
 
 const HEADERS = {
-  Authorization: `Token ${API_TOKEN}`,
+  Authorization: `Token ${processenvAPI_TOKEN}`,
   "Content-Type": "application/json",
   Accept: "application/json",
 };
@@ -137,7 +140,7 @@ export async function GET(request: Request) {
       },
     };
 
-    const response = await fetch(BASE_URL, {
+    const response = await fetch(processenvBASE_URL, {
       method: "POST",
       headers: HEADERS,
       body: JSON.stringify(payload),
@@ -169,19 +172,20 @@ export async function GET(request: Request) {
       new Map(formatted.map((item) => [item.title, item])).values()
     );
 
-    const finalResponse = {
+    const responsePayload = {
       total: documents.length,
       todayCount: unique.length,
       articles: unique,
       keywordsUsed: keywords,
     };
 
-    const json = JSON.stringify(finalResponse);
+    const responseString = JSON.stringify(responsePayload);
 
-    // 🟢 SAVE TO REDIS (TTL 60 sec)
-    await redis.set(cacheKey, json, "EX", 60);
+    const CACHE_TTL = 300;
 
-    return new Response(json, {
+    await redis.set(cacheKey, responseString, "EX", CACHE_TTL);
+
+    return new Response(responseString, {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
