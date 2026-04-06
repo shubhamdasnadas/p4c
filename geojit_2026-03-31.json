@@ -1,0 +1,423 @@
+[
+  {
+    "id_site": 315184,
+    "id_article": 102921,
+    "hidden": false,
+    "position": 1,
+    "timezone": "Asia/Kolkata",
+    "countrycode": "IN",
+    "countryname": "India",
+    "similarweb": {
+      "domain": "bizzbuzz.news"
+    },
+    "site_rank": {
+      "rank_global": 20700,
+      "rank_country": 723
+    },
+    "unix_timestamp": 1774939318,
+    "mediatype": {
+      "timemap": false,
+      "clip": false,
+      "hastext": true,
+      "haslogo": false,
+      "paywall": false,
+      "fulltext": true,
+      "text": "WEB"
+    },
+    "circulation": 10,
+    "internal_search_reply": {
+      "id_site": 315184,
+      "id_article": 102921,
+      "text": ""
+    },
+    "stimestamp": 372544329,
+    "stimestamp_index": 372544329,
+    "local_time": {
+      "GMT": 1,
+      "text": "20260331T08:41:58+0200"
+    },
+    "local_rcf822_time": {
+      "text": "Tue, 31 Mar 2026 08:41:58 +0200"
+    },
+    "distribute_conditions": "",
+    "content_protected": 0,
+    "language": {
+      "encoding": "iso-639",
+      "text": "en"
+    },
+    "word_count": 674,
+    "first_source": {
+      "id": 3482734,
+      "name": "BizzBuzz - Markets",
+      "sitename": "BizzBuzz",
+      "url": "https://www.bizzbuzz.news/markets",
+      "siteurl": "https://www.bizzbuzz.news"
+    },
+    "header": {
+      "matches": false,
+      "text": "FY26 closes in red as war, oil, outflows deliver triple whammy"
+    },
+    "summary": {
+      "matches": false,
+      "text": "Equity benchmark indices Sensex and Nifty ended the last trading session of the 2025-26 fiscal year sharply lower on Monday as the ongoing war in West Asia and surging crude oil prices kept investors' sentiment fragile. Weak trends in Asian markets and unabated foreign fund outflows also added to the bearish trend in domestic equities."
+    },
+    "body": {
+      "matches": false,
+      "text": "<p> Declining for the second day in a row, the 30-share BSE Sensex tumbled 1,635.67 points or 2.22 per cent to settle at 71,947.55. During the day, it plunged 1,809.09 points or 2.45 per cent to 71,774.13. A total of 3,563 stocks declined, while 876 advanced and 154 remained unchanged on the BSE.</p> <p> The 50-share NSE Nifty slumped 488.20 points or 2.14 per cent to end at 22,331.40. “The downturn was primarily driven by escalating geopolitical tensions in the Middle East, which dashed hopes of de-escalation and pushed crude oil prices higher, raising concerns over inflation and macro stability for oil-importing economies like India.</p> <p> “Weak global cues, including declines across Asian and US markets, coupled with continued foreign institutional outflows and a weakening rupee, further weighed on sentiment,” Ajit Mishra, SVP, Research, Religare Broking Ltd, said. From the 30-Sensex firms, Bajaj Finance, State Bank of India, InterGlobe Aviation, Bajaj Finserv, Axis Bank and Kotak Mahindra Bank were among the biggest laggards. On the other hand, Tech Mahindra and Power Grid were the gainers. Brent crude, the global oil benchmark, jumped 2.18 per cent to USD 115.1 per barrel. In the last two trading sessions, the BSE benchmark Sensex has lost 3,325.9 points, or 4.41 per cent, and the Nifty dived 975.05 points, or 4.18 per cent. In the 2025-26 financial year, the BSE benchmark plunged 5,467.37 points, or 7 per cent, and the Nifty dropped 1,187.95 points, or 5 per cent.</p> <p> The BSE MidCap Select index lost 3.13 per cent, and the SmallCap Select index declined 2.14 per cent. Sectorally, all indices ended in the red, with auto, FMCG, consumer durables, capital goods, realty, private banks, and PSU banks falling in the range of 2â€“4 per cent.</p> <p> The BSE PSU Bank tanked 4.60 per cent, MidSmall Private Banks Quality Tilt (3.96 per cent), Bankex (3.80 per cent), Financial Services (3.46 per cent), Private Banks (3.43 per cent), BSE Top 10 Banks (3.40 per cent), Telecommunication (3.09 per cent) and Realty (3.03 per cent). “Banking stocks were among the key laggards following the RBI's new restrictions on banks' foreign exchange positions aimed at stabilising the rupee, which led to sharp declines across major private and public sector lenders. “While valuations now appear more favourable after the recent correction, the trajectory of earnings revisions remains the key determinant of market direction.</p> <p> Continued volatility in oil prices and rupee weakness may exert pressure on input costs, increasing the risk of near-term earnings downgrades,” Vinod Nair, Head of Research, Geojit Investments Limited, said. Meanwhile, the rupee gained 7 paise in a highly volatile session to close at 94.78 (provisional) against the US dollar on Monday.</p> <p> Foreign Institutional Investors (FIIs) offloaded equities worth Rs 4,367.30 crore on Friday, according to exchange data. Domestic Institutional Investors (DIIs), however, bought stocks worth Rs 3,566.15 crore.</p> <p> Foreign investors have pulled out Rs 1.14 lakh crore (about USD 12.3 billion) from domestic equities in March, making it the worst monthly outflow, weighed down by escalating tensions in West Asia, a weakening rupee and concerns over the impact of elevated crude oil prices on India's growth. On Friday, the Sensex tanked 1,690.23 points or 2.25 per cent to settle at 73,583.22. The Nifty dropped 486.85 points or 2.09 per cent to end at 22,819.60.</p> "
+    },
+    "articleimages": {
+      "count": 2,
+      "articleimage": [
+        {
+          "url": "https://www.bizzbuzz.news/h-upload/2026/03/31/1991455-marekets.webp"
+        },
+        {
+          "url": "https://www.bizzbuzz.news/h-upload/2026/01/06/1986872-artboard-4.webp?time=1767710511793"
+        }
+      ]
+    },
+    "caption": {
+      "text": " "
+    },
+    "quotes": [],
+    "url": "https://www.bizzbuzz.news/markets/fy26-closes-in-red-as-war-oil-outflows-deliver-triple-whammy-1388180",
+    "orig_url": "https://www.bizzbuzz.news/markets/fy26-closes-in-red-as-war-oil-outflows-deliver-triple-whammy-1388180",
+    "url_common": "bizzbuzz.news",
+    "screenshots": []
+  },
+  {
+    "id_site": 85277,
+    "id_article": 3963703,
+    "hidden": false,
+    "position": 2,
+    "timezone": "Asia/Kolkata",
+    "countrycode": "IN",
+    "countryname": "India",
+    "similarweb": {
+      "domain": "msn.com"
+    },
+    "site_rank": {
+      "rank_global": 42490,
+      "rank_country": 1334
+    },
+    "unix_timestamp": 1774933376,
+    "mediatype": {
+      "timemap": false,
+      "clip": false,
+      "hastext": true,
+      "haslogo": false,
+      "paywall": false,
+      "fulltext": true,
+      "text": "WEB"
+    },
+    "internal_search_reply": {
+      "id_site": 85277,
+      "id_article": 3963703,
+      "text": ""
+    },
+    "stimestamp": 372550271,
+    "stimestamp_index": 372550271,
+    "local_time": {
+      "GMT": 1,
+      "text": "20260331T07:02:56+0200"
+    },
+    "local_rcf822_time": {
+      "text": "Tue, 31 Mar 2026 07:02:56 +0200"
+    },
+    "distribute_conditions": "",
+    "content_protected": 0,
+    "language": {
+      "encoding": "iso-639",
+      "text": "en"
+    },
+    "word_count": 332,
+    "first_source": {
+      "id": 1750222,
+      "name": "Msn India",
+      "sitename": "Msn India",
+      "url": "https://www.msn.com/en-in",
+      "siteurl": "https://www.msn.com/en-in"
+    },
+    "header": {
+      "matches": false,
+      "text": "'Buy' Coal India: 'Rising heat, rising demand' - Check share price target"
+    },
+    "summary": {
+      "matches": false,
+      "text": "  As summer sets in, so are the prospects for energy producers. Geojit Financial Services in its latest note, said the near to medium-term trigger"
+    },
+    "body": {
+      "matches": false,
+      "text": "<p>as ‘rising heat, rising demand…' for Coal India Ltd, highlighting that seasonal factors could accelerate power demand after a muted phase. The brokerage expects a recovery in the company's coal offtake to offset its subdued performance from earlier in the fiscal year. Geojit noted that state-owned miner consolidated revenue slipped 5.2% year-on-year to Rs 34,924 crore, while profit after tax (PAT) dropped 15.6% to Rs 7,166 crore for the third quarter of FY26. “Coal offtake reached 188.66 MT during the quarter; while this represents a 3% YoY decline due to a prolonged monsoon, the volume still reflects a continued prioritisation of supply security for the power sector,” Geojit said. Amid a broader market downturn, the mining major stood out as one of just four Nifty stocks to end the month of March in the green. Geojit also noted that tensions in Iran have sent global energy prices soaring, creating a highly favourable setup for Coal India to benefit from higher e-auction realisations as industries pivot from costly imports to domestic coal. The brokerage has upgraded its rating on Coal India stock to ‘Buy'. The brokerage has raised its target price by nearly 25% to Rs 506 from its previous target of Rs 405 in August 2025. Valuing the stock at 6.3x FY28E EV/EBITDA, this revised target indicates a potential 12.38% upside from the current market price of Rs 450.25. “The company aims to increase their coal production to 1 billion tonne by FY28-29,” Geojit said, highlighting a 500 MW solar power pact in Uttar Pradesh and a strategic foray into critical minerals with a rare earth element block in Maharashtra. Watch Live TV in English Watch Live TV in Hindi</p>"
+    },
+    "articleimages": {
+      "count": 3,
+      "articleimage": [
+        {
+          "url": "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1ZMhQR.img?w=612&h=344&m=4&q=72"
+        },
+        {
+          "url": "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1ZMhQR.img"
+        },
+        {
+          "url": "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1ZMYbC.img"
+        }
+      ]
+    },
+    "caption": {
+      "text": " "
+    },
+    "quotes": [],
+    "url": "https://www.msn.com/en-in/money/topstories/buy-coal-india-rising-heat-rising-demand-check-share-price-target/ar-AA1ZMETl",
+    "orig_url": "https://www.msn.com/en-in/money/topstories/buy-coal-india-rising-heat-rising-demand-check-share-price-target/ar-AA1ZMETl",
+    "url_common": "msn.com/en-in",
+    "screenshots": []
+  },
+  {
+    "id_site": 893,
+    "id_article": 499713,
+    "hidden": false,
+    "position": 3,
+    "timezone": "Asia/Kolkata",
+    "countrycode": "IN",
+    "countryname": "India",
+    "similarweb": {
+      "domain": "businesstoday.in"
+    },
+    "site_rank": {
+      "rank_global": 2039,
+      "rank_country": 110
+    },
+    "unix_timestamp": 1774928496,
+    "mediatype": {
+      "timemap": false,
+      "clip": false,
+      "hastext": true,
+      "haslogo": false,
+      "paywall": false,
+      "fulltext": true,
+      "text": "WEB"
+    },
+    "circulation": 10000,
+    "internal_search_reply": {
+      "id_site": 893,
+      "id_article": 499713,
+      "text": ""
+    },
+    "stimestamp": 372555151,
+    "stimestamp_index": 372555151,
+    "local_time": {
+      "GMT": 1,
+      "text": "20260331T05:41:36+0200"
+    },
+    "local_rcf822_time": {
+      "text": "Tue, 31 Mar 2026 05:41:36 +0200"
+    },
+    "distribute_conditions": "",
+    "content_protected": 0,
+    "language": {
+      "encoding": "iso-639",
+      "text": "en"
+    },
+    "word_count": 322,
+    "first_source": {
+      "id": 3791947,
+      "name": "Business Today",
+      "sitename": "Business Today",
+      "url": "https://www.businesstoday.in",
+      "siteurl": "https://www.businesstoday.in"
+    },
+    "header": {
+      "matches": false,
+      "text": "'Buy' Coal India: 'Rising heat, rising demand...' - Check share price target"
+    },
+    "summary": {
+      "matches": false,
+      "text": "  As summer sets in, so are the prospects for energy producers. Geojit Financial Services in its latest note, said the near to medium-term trigger"
+    },
+    "body": {
+      "matches": false,
+      "text": "<p>as ‘rising heat, rising demand…' for Coal India Ltd , highlighting that seasonal factors could accelerate power demand after a muted phase.</p> <p> The brokerage expects a recovery in the company's coal offtake to offset its subdued performance from earlier in the fiscal year. Geojit noted that state-owned miner consolidated revenue slipped 5.2% year-on-year to Rs 34,924 crore, while profit after tax (PAT) dropped 15.6% to Rs 7,166 crore for the third quarter of FY26.</p> <p> “Coal offtake reached 188.66 MT during the quarter; while this represents a 3% YoY decline due to a prolonged monsoon, the volume still reflects a continued prioritisation of supply security for the power sector,” Geojit said.</p> <p> Amid a broader market downturn, the mining major stood out as one of just four Nifty stocks to end the month of March in the green.</p> <p> Geojit also noted that tensions in Iran have sent global energy prices soaring, creating a highly favourable setup for Coal India to benefit from higher e-auction realisations as industries pivot from costly imports to domestic coal.</p> <p> The brokerage has upgraded its rating on Coal India stock to ‘Buy'. The brokerage has raised its target price by nearly 25% to Rs 506 from its previous target of Rs 405 in August 2025. Valuing the stock at 6.3x FY28E EV/EBITDA, this revised target indicates a potential 12.38% upside from the current market price of Rs 450.25.</p> <p> “The company aims to increase their coal production to 1 billion tonne by FY28-29,” Geojit said, highlighting a 500 MW solar power pact in Uttar Pradesh and a strategic foray into critical minerals with a rare earth element block in Maharashtra.</p>"
+    },
+    "articleimages": {
+      "count": 2,
+      "articleimage": [
+        {
+          "caption": {
+            "matches": false,
+            "text": "<p>The brokerage has upgraded its rating on Coal India stock to ‘Buy'. The brokerage has raised its target price by nearly 25% to Rs 506. </p> "
+          },
+          "url": "https://akm-img-a-in.tosshub.com/businesstoday/images/story/202603/69cb409e7ea24-the-brokerage-has-upgraded-its-rating-on-coal-india-stock-to-buy-the-brokerage-has-raised-its-tar-313326712-16x9.jpg"
+        },
+        {
+          "url": "https://akm-img-a-in.tosshub.com/businesstoday/styles/medium_crop_simple/public/images/story/202603/market-indices_just_four_nifty_stocks_rose_in_march_1.jpg?itok=XTv-x9LW"
+        }
+      ]
+    },
+    "caption": {
+      "text": "<p>The brokerage has upgraded its rating on Coal India stock to ‘Buy'. The brokerage has raised its target price by nearly 25% to Rs 506. </p> "
+    },
+    "quotes": [],
+    "url": "https://www.businesstoday.in/markets/stocks/story/buy-coal-india-rising-heat-rising-demand-check-share-price-target-523230-2026-03-31",
+    "orig_url": "https://www.businesstoday.in/markets/stocks/story/buy-coal-india-rising-heat-rising-demand-check-share-price-target-523230-2026-03-31",
+    "url_common": "businesstoday.in",
+    "screenshots": []
+  },
+  {
+    "id_site": 25774,
+    "id_article": 1524610,
+    "hidden": false,
+    "position": 4,
+    "timezone": "Asia/Kolkata",
+    "countrycode": "IN",
+    "countryname": "India",
+    "similarweb": {
+      "domain": "moneycontrol.com"
+    },
+    "site_rank": {
+      "rank_global": 513,
+      "rank_country": 35
+    },
+    "unix_timestamp": 1774920961,
+    "mediatype": {
+      "timemap": false,
+      "clip": false,
+      "hastext": true,
+      "haslogo": false,
+      "paywall": false,
+      "fulltext": true,
+      "text": "WEB"
+    },
+    "internal_search_reply": {
+      "id_site": 25774,
+      "id_article": 1524610,
+      "text": ""
+    },
+    "stimestamp": 372562686,
+    "stimestamp_index": 372562686,
+    "local_time": {
+      "GMT": 1,
+      "text": "20260331T03:36:01+0200"
+    },
+    "local_rcf822_time": {
+      "text": "Tue, 31 Mar 2026 03:36:01 +0200"
+    },
+    "distribute_conditions": "",
+    "content_protected": 0,
+    "language": {
+      "encoding": "iso-639",
+      "text": "en"
+    },
+    "word_count": 10626,
+    "first_source": {
+      "id": 2501453,
+      "name": "Money Control",
+      "sitename": "Money Control",
+      "url": "https://www.moneycontrol.com",
+      "siteurl": "https://www.moneycontrol.com"
+    },
+    "header": {
+      "matches": false,
+      "text": "vs , Quick Scorecard, Match Score and Cricket Updates |"
+    },
+    "summary": {
+      "matches": false,
+      "text": "  Closing Bell: Bears maul market again; Nifty below 22,400, Sensex tanks 1,636 pts  Market Close | Sensex, Nifty fall more than 2% each"
+    },
+    "body": {
+      "matches": false,
+      "text": "<p>Indian equity indices ended sharply lower on March 30, with the Nifty 50 closing below 22,350 amid broad-based selling across sectors. At close, the Sensex was down 1,635.67 points or 2.22 percent at 71,947.55, and the Nifty was down 488.20 points or 2.14 percent at 22,331.40.We wrap up today's edition of the Moneycontrol live market blog, and will be back Wednesday morning with all the latest updates and alerts. Please visit https://www.moneycontrol.com/markets/global-indices for all the global market action.</p> <p>Ajit Mishra – SVP, Research, Religare Broking</p> <p>Markets witnessed a sharp sell-off on the monthly expiry day, with the Nifty 50 opening gap-down and slipping below the 22,500 mark amid weak global cues. The index remained under sustained selling pressure throughout the session, with only brief intraday recovery attempts, and eventually closed near the day's lower band around 22,331 levels, down approximately 2.14%.Sectorally, the decline was led by banking, financials, realty, and auto stocks, while select defensive and metal names showed relative resilience. Broader markets mirrored the weakness, with midcap and smallcap indices declining in tandem by 2.5%–3%, reflecting broad-based risk aversion.The downturn was primarily driven by escalating geopolitical tensions in the Middle East, which dashed hopes of de-escalation and pushed crude oil prices higher, raising concerns over inflation and macro stability for oil-importing economies like India. Weak global cues, including declines across Asian and US markets, coupled with continued foreign institutional outflows and a weakening rupee, further weighed on sentiment. Additionally, rising bond yields and concerns over tighter financial conditions exerted pressure, particularly on rate-sensitive sectors such as banking and auto.From a technical perspective, the Nifty has declined over 11% during March. With the onset of the new series, it will be crucial to watch whether the index holds its long-term moving average, i.e., the 200-week EMA, placed around the 21,900 mark. Persistent weakness in key sectors—especially banking and financials—along with elevated volatility, as indicated by India VIX hovering near 28, suggests continued downside risk. Any pullback is likely to face resistance in the 22,600–23,000 zone, and traders are advised to remain cautious and prioritize risk management until stability returns.</p> <p>Rupak De, Senior Technical Analyst at LKP Securities</p> <p>The Nifty continues to move lower as the bears appear to be tireless fighters, with statements from the US and Iran providing support to the sellers. The Nifty has slipped toward its previous swing low on the daily chart, retracing almost 90% of the previous rise from the April 2025 low to the February 2026 high.While the Nifty seems to be finding support just above the rising trendline on the daily chart, another interesting formation is creating a silver lining — a hidden positive divergence on the daily RSI. Therefore, I won't be surprised if the Nifty stages a decent recovery from Wednesday.On the lower end, 22,200 is likely to act as a crucial support level, from where a significant rally might emerge. The view of a bullish reversal will be negated if the index slips below 22,200.</p> <p>Sudeep Shah, Head - Technical and Derivatives Research at SBI Securities</p> <p>Nifty opened with a gap down on the final trading day of FY26 and attempted an early recovery, but the bounce lacked follow-through. The index faced selling pressure at higher levels and eventually broke its key intraday support of 22470–22450, slipping further to close at 22331, down 2.14%. Notably, this marks the 8th session in the March expiry series where Nifty has closed with losses of 1% or more, indicating sustained weakness.The index has also breached its prior swing low of 22471 (23rd March), confirming a breakdown on the charts. Momentum indicators remain bearish, with RSI failing to cross the 40 mark and turning lower, while DI- continues to be placed well above the DI+ on the ADX, reinforcing the negative trend. Nifty ended FY26 with a loss of 5.05%.On the sectoral front, all the sectoral indices ended the day in red with Nifty PSU Bank & Nifty Financial Services emerging as the top two sectoral losers, losing over 3% each. With regards to stocks, Hindalco & Tech Mahindra ended up as top two gainers while Bajaj Finance & Shriram Finance ended with losses.The broader markets mirrored the weak sentiment, with both midcap and small cap indices opening gap down and extending losses through the session, ending over 2.5% lower. However, despite the sharp correction, these segments are still holding relatively better compared to frontline indices. Unlike Nifty and Bank Nifty, midcap and small cap indices have not yet breached their prior swing lows of 23rd March, indicating relative resilience. This suggests that while selling pressure is evident, pockets within the broader market continue to show strength.The market breadth deteriorated as the advance-decline ratio was heavily skewed in the favour of bears at day's close. A total of 442 stocks out of the Nifty 500 universe ended in the red.Nifty View</p> <p>Taking Stock: Bears tighten grip; Nifty ends below 22,350, Sensex slips 1,636 pts</p> <p>All the sectors ended in the red with auto, FMCG, consumer durables, capital goods, telecom, realty, private bank, PSU bank down 2-4%....Read More</p> <p>Abhinav Tiwari Research Analyst at Bonanza</p> <p>Today, the Indian stock markets ended lower as investors remained cautious especially banking and financial stocks. The weak closing was mainly driven by concerns around the Reserve Bank of India's latest move to tighten limits on banks' dollar positions, which created pressure on banking shares because treasury related earnings may be affected in the near term.The RBI's decision is aimed at reducing excessive speculation in the currency market and controlling volatility in the rupee. Banks that actively manage foreign exchange books may now have less flexibility in carrying large dollar positions, which could reduce short term gains from treasury operations. As a result, major banking stocks saw selling pressure during the session.Among stock specific moves, Data Patterns traded higher along with other defence counters after the Defence Acquisition Council granted Acceptance of Necessity for defence procurement proposals worth nearly Rs 2.38 lakh crore.Looking ahead, market sentiment may remain cautious for the next few sessions as we watch the impact of RBI's currency measures and prepare for Q4 earnings. If earnings remain strong, selective buying may return, especially in fundamentally strong sectors, but volatility in banking and export linked stocks may continue in the short term.</p> <p>Vinod Nair, Head of Research, Geojit Investments</p> <p>Amid unresolved global tensions, rising oil prices, and continued FII outflows, the market ended the final trading session of the current financial year on a cautious note. Banking stocks were among the key laggards following the RBI's new restrictions on banks' foreign exchange positions aimed at stabilizing the rupee, which led to sharp declines across major private and public sector lenders.While valuations now appear more favourable after the recent correction, the trajectory of earnings revisions remains the key determinant of market direction. Continued volatility in oil prices and rupee weakness may exert pressure on input costs, increasing the risk of near-term earnings downgrades.</p> <p>Vikrant Chaturvedi, Associate Director - Research, Brickwork Ratings</p> <p>FY2026 underscored the challenges of an uncertain and volatile global macro environment, with equity markets underperforming owing to President Trump's tariffs from the first quarter onwards, and a sharp crude oil price spike due to supply disruptions in the fourth quarter, driving cost inflation and weighing on corporate margins.From a credit ratings perspective, debt markets remained resilient, supported by strong domestic capex and stable refinancing conditions, though spreads may widen if volatility intensifies.We expect commodities to outperform in FY2027, with base metals driven by infrastructure demand, precious metals acting as safe havens, and oil & gas supported by geopolitical risk premiums.Equities face continued headwinds, while debt markets should offer relative stability. FY2027 will be a year of selective but constructive performance across asset classes.</p> <p>Currency Check | Rupee recovers from record low, ends flat at 94.83</p> <p>The Indian rupee ended flat on Monday after hitting a fresh intraday record low of 95.12, closing at 94.83 per dollar compared to Friday's close of 94.81.</p> <p>Market Close | Bears maul market again; Nifty below 22,350, Sensex tanks 1,636 pts</p> <p>Indian equity indices ended sharply lower on March 30, with the Nifty 50 closing at 22,331 amid broad-based selling across sectors.At close, the Sensex was down 1,635.67 points or 2.22 percent at 71,947.55, and the Nifty was down 488.20 points or 2.14 percent at 22,331.40. About 837 shares advanced, 3419 shares declined, and 138 shares unchanged.All the sectors ended in the red with auto, FMCG, consumer durables, capital goods, telecom, realty, private bank, PSU bank down 2-4%.Broader markets also witnessed sharp declines, with the Nifty Midcap and Smallcap indices shedding around 2.6 percent each.Among the Nifty constituents, major losers included Bajaj Finance, Axis Bank, Shriram Finance, State Bank of India, and InterGlobe Aviation. On the other hand, gainers were Hindalco Industries, Coal India, ONGC, and Power Grid Corporation of India.</p> <p>Sensex Today | Welspun Living shares fall most in 10 months</p> <p>Welspun Living was quoting at Rs 107.65, down Rs 8.30, or 7.16 percent.It has touched an intraday high of Rs 115.75 and an intraday low of Rs 107.45.It was trading with volumes of 97,529 shares, compared to its five day average of 373,378 shares, a decrease of -73.88 percent.In the previous trading session, the share closed up 2.16 percent or Rs 2.45 at Rs 115.95.The share touched a 52-week high of Rs 154.60 and a 52-week low of Rs 107.05 on 12 May, 2025 and 07 April, 2025, respectively.Currently, the stock is trading 30.37 percent below its 52-week high and 0.56 percent above its 52-week low.Market capitalisation stands at Rs 10,325.28 crore.</p> <p>Nifty50 Today | Solarworld Energy Solutions bags order of Rs 176.91 crore</p> <p>The company has received the letter of award of Engineering, Procurement and Construction (EPC) Package for BESS Implementation at Solapur Super Thermal Power Station.Solarworld Energy Solutions was quoting at Rs 143.00, up Rs 0.55, or 0.39 percent.It has touched a 52-week low of Rs 139.15.It has touched an intraday high of Rs 148.75 and an intraday low of Rs 139.15.</p> <p>Nifty50 Today | Syngene International's MD, CEO resigns</p> <p>Peter Bains has resigned from the position of Managing Director and Chief Executive Officer, effective June 30, 2026. The board has appointed Siddharth Mittal as an Additional Director, designated as Managing Director and Chief Executive Officer, and a member of the Executive Committee, effective July 1, subject to shareholder approval.The board also announced a change in the role of Kiran Mazumdar-Shaw from Non-Executive Chairperson to Executive Chairperson.Syngene International was quoting at Rs 389.30, down Rs 24.75, or 5.98 percent.It has touched an intraday high of Rs 410.00 and an intraday low of Rs 388.60.It was trading with volumes of 115,330 shares, compared to its five day average of 50,938 shares, an increase of 126.41 percent.</p> <p>Rupee crosses 95 vs USD for the first time; India's 10-year bond yield tops 7%</p> <p>Last week, rupee saw its fourth consecutive weekly decline...Read More</p> <p>Nifty50 Today | Jefferies retains 'buy' rating on HDFC Bank, target price at Rs 1,240</p> <p>#1 RBI caps banks' onshore forex exposure at USD 100 m vs earlier 25 percent of capital limit#2 Move driven by sharp rupee depreciation & wider offshore-onshore forex gap#3 Cap may support rupee stability but forced unwinding by April 10 risks Q4 MTM losses#4 Total positions estimated at USD 30–40 bn, mainly held by large domestic & foreign banks#5 Banking sector has requested regulatory leniency from RBI#6 HDFC Bank stock down 24 percent YTD on chairman exit & West Asia concerns#7 Valuations at 1.6x PB & 13x PE at discount to peers#8 Strong asset quality, growth & RoE support valuations#9 Credit cost & topline risks manageable#10 Board clarity & leadership decisions may drive re-rating#11 The bank is among sector top picks</p> <p>Sensex Today | CLSA keeps 'high conviction outperform' rating on Avenue Supermarts, target price at Rs 6,185</p> <p>#1 DMart added 9 stores, total count at 481#2 FY additions at 66 versus 60 expected#3 For quarter, opened 39 stores with two days left versus 28 stores YoYAvenue Supermarts was quoting at Rs 3,950.10, up Rs 41.20, or 1.05 percent. It has touched an intraday high of Rs 3,965 and an intraday low of Rs 3,780.20. It was trading with volumes of 84,239 shares, compared to its five day average of 32,316 shares, an increase of 160.68 percent.</p> <p>Nifty50 Today | HDB Financial Services shares lost the most since IPO</p> <p>HDB Financial Services was quoting at Rs 560.95, down Rs 29.65, or 5.02 percent.It has touched a 52-week low of Rs 560.60.It has touched an intraday high of Rs 585.00 and an intraday low of Rs 560.60.</p> <p>Currency Check | Rupee crosses 95 mark for the first time</p> <p>The Indian rupee erased all its intraday gains and crossed the 95 mark for the first time, hitting a record low of 95.12. It was last trading lower by 15 paise at 94.96 per dollar against Friday's close of 94.81.</p> <p>Nifty50 Today | KNR Constructions bags project of Rs 1,734 crore</p> <p>The company has received a Letter of Award from the National Highways Authority of India for the construction of a four-lane NH-167 stretch from Gudebellur to Mahabubnagar on the Hyderabad–Panaji section under NH(O) on a Hybrid Annuity Mode (HAM) basis in Telangana. The project cost is Rs 1,734 crore.KNR Constructions was quoting at Rs 111.15, up Rs 1.45, or 1.32 percent. It has touched an intraday high of Rs 123.50 and an intraday low of Rs 110.45. It was trading with volumes of 2,271,210 shares, compared to its five day average of 101,192 shares, an increase of 2,144.46 percent.</p> <p>Sensex Today | Monomark Engineering files DRHP</p> <p>Monomark Engineering has filled for IPO with 27 million new shares: Bloomberg</p> <p>Markets@3| Sensex slips 1650 points, Nifty below 22350</p> <p>The Sensex was down 1,653.91 points or 2.25 percent at 71,929.31, and the Nifty was down 491.10 points or 2.15 percent at 22,328.50. About 710 shares advanced, 3395 shares declined, and 114 shares unchanged.NSE Volume ShockersCompanyCMP Chg(%)Today Vol 5D Avg VolVol Chg(%) R M Drip Spri36.95 -2.07%2.66m9,800.0027,032.00 JNK India210.75 -3.82%3.32m26,910.8012,241.00 Dalmia Sugar394.80 14.29%23.87m338,165.206,957.00 KNR Construct112.88 2.97%107.89m1,728,675.006,141.00 Jeena Sikho540.60 -2.36%814.51k18,612.004,276.00 Atal21.05 -2.32%4.34m100,889.204,199.00 Marvel Decor57.00 -5%94.00k2,200.004,173.00 KCK Ind11.95 -17.3%580.00k13,600.004,165.00 Cool Caps28.55 -4.19%335.00k8,400.003,888.00 BEW Eng65.10 -7.33%45.00k1,125.003,900.00 ABSL SIL ETF225.08 2.05%2.93m78,904.203,611.00 HDFC NiftyNext61.56 -2.58%1.29m36,327.403,438.00 Ganesha Ecosph854.85 9.5%5.25m155,612.403,275.00 Sapphire Foods150.09 -5.74%2.27m68,650.003,214.00 G-Tec Jainx18.89 -2.73%104.80k4,030.402,500.00 SRG Housing Fin235.05 1.05%82.71k3,632.602,177.00 Khadim India78.74 -6.41%288.77k18,435.001,466.00 ANANTAM103.20 0.23%853.27k55,066.401,450.00 HDFC Nifty 250144.05 -2.88%6.74m436,878.601,443.00 UTKARSHBNK10.22 -7.43%15.21m1,045,114.801,355.00</p> <p>Govt considers 3-6 month loan repayment moratorium amid Iran war impact, reports CNBC-Awaaz</p> <p>As per the CNBC-Awaaz report, under the proposed moratorium, borrowers would be given relief from paying loan instalments for a fixed period....Read More</p> <p>Sensex Today | Paras Defence divests entire 58.02% equity stake in subsidiary</p> <p>Paras Defence and Space Technologies has divested its entire 58.02% equity stake held in its subsidiary, Ayatti Innovative, comprising 15,20,000 equity shares of face value of Rs 10 each. Consequently, Ayatti has ceased to be a subsidiary of Paras.Paras Defence and Space Technologies was quoting at Rs 595.40, down Rs 30.30, or 4.84 percent. It has touched an intraday high of Rs 641.35 and an intraday low of Rs 594.55. It was trading with volumes of 68,731 shares, compared to its five day average of 65,379 shares, an increase of 5.13 percent.</p> <p>Nifty50 Today | Wockhardt's Zaynich receives favourable recommendation from CDSCO's</p> <p>The Subject Expert Committee (SEC) of the Central Drugs Standard Control Organization (CDSCO), has granted a favourable recommendation for marketing permission of Wockhardt's novel antibiotic, Zaynich (Zidebactam/Cefepime), for the treatment of Gram-negative infections.It paves the way for final approval of Zaynich by the Drugs Controller General of India (DCGI).Wockhardt was quoting at Rs 1,189.35, up Rs 0.30, or 0.03 percent. It has touched an intraday high of Rs 1,231.30 and an intraday low of Rs 1,173.05. It was trading with volumes of 55,531 shares, compared to its five day average of 96,896 shares, a decrease of -42.69 percent.</p> <p>LPG supply concerns: Eternal, Jubilant Food, other restaurant-related stocks fall up to 7%</p> <p>Domestic households have been prioritised in the allocation of available LPG, resulting in limited supplies for commercial consumption. ...Read More</p> <p>Nifty50 Today | Bharat Electronics receives orders worth Rs.1660 crore</p> <p>Bharat Electronics has secured additional orders worth Rs 1660 crore. Major orders received include satellite communication network, electronic warfare systems, communication equipment, avionics, software solutions, munitions, EVM, strategic components, upgrades, spares, services etcBharat Electronics was quoting at Rs 402.50, down Rs 2.25, or 0.56 percent. It has touched an intraday high of Rs 413.15 and an intraday low of Rs 399.30. It was trading with volumes of 1,127,987 shares, compared to its five day average of 1,012,061 shares, an increase of 11.45 percent.</p> <p>Sensex Today | Enviro Infra Engineers bags order pf Rs 405.71 crore</p> <p>The company has received Letter of Awards (LOA) in renewable segment from NTPC for execution of BESS Projects in two (2) states.The contract is awarded on an EPC basis for implementation of Battery Energy Storage Systems (BESS) at thermal power station at Tanda, Uttar Pradesh and Bongaigaon, Assam including Comprehensive Annual Maintenance after successful performance testing.Enviro Infra Engineers was quoting at Rs 142.40, up Rs 4.40, or 3.19 percent. It has touched an intraday high of Rs 147.45 and an intraday low of Rs 139.65.</p> <p>Sensex Today | NTPC board approves Rs 5,822 crore BESS investment</p> <p>The board approved the company's investment proposal for Battery Energy Storage Systems (BESS) with a total capacity of 4.70 GWh, at an estimated project cost of Rs 5,821.90 crore.It also approved an additional equity commitment of Rs 3,173.67 crore in Meja Urja Nigam (MUNPL), a joint venture of NTPC and Uttar Pradesh Rajya Vidyut Utpadan Nigam (UPRVUNL), for setting up the Meja Super Thermal Power Project Stage-II (3x800 MW). With this investment, the total equity commitment in MUNPL would reach Rs 5,000 crore.Additionally, the company's subsidiary, NTPC Renewable Energy, has declared COD for 180 MW solar capacity. With this, the total installed capacity of the NTPC group stands at 88,889 MW and the commercial capacity at 87,809 MW.NTPC was quoting at Rs 372.00, down Rs 3.90, or 1.04 percent. It has touched an intraday high of Rs 377.70 and an intraday low of Rs 371.75.</p> <p>Sensex Today | Patanjali Foods share price down most in 16 weeks</p> <p>Patanjali Foods was quoting at Rs 457.75, down Rs 17.80, or 3.74 percent.It has touched a 52-week low of Rs 455.20.It has touched an intraday high of Rs 473.95 and an intraday low of Rs 455.20.It was trading with volumes of 67,607 shares, compared to its five day average of 91,471 shares, a decrease of -26.09 percent.</p> <p>Kotak restructures portfolio post sell-off; adds DLF, Info Edge, Coforge</p> <p>Kotak Institutional Equities said the recent market correction has improved valuations and created opportunities across stocks, prompting it to split its model portfolio into separate large-cap and mid-cap baskets. The brokerage added names such as Coforge, Embassy REIT and DLF, while adjusting weights in Reliance Industries and Mahindra & Mahindra...Read More</p> <p>Stock Market LIVE Updates | Stocks that have hit their 52-week low</p> <p>NIFTY 500 Stocks touched 52-week LowCompany52-Week LowDay's LowCMP Valor Estate91.2091.2085.00 Raymond Life760.00760.00727.00 Alok Industries11.8811.8811.27 HUDCO166.99166.99159.46 Route439.80439.80418.35</p> <p>Gold finds footing near $4,500 as Iran war enters fifth week</p> <p>Bullion rose as much as 1.3% to trade above $4,500 an ounce, showing resilience despite a continued rise in oil prices and downturn in equities. ...Read More</p> <p>Stock Market LIVE Updates | Most active stocks on the Nifty 50 index</p> <p>NIFTY 50 Most Active StocksCompanyCMP Chg(%)VolumeValue(Rs cr) HDFC Bank734.40-2.8856.68m4,211.98 Reliance1,345.90-0.1614.48m1,954.09 ICICI Bank1,217.30-1.3411.56m1,405.60 Axis Bank1,164.70-3.3610.11m1,178.03 SBI986.70-3.2211.85m1,178.57</p> <p>NSE seeks shareholders' interest for OFS participation, kicks off key process for IPO</p> <p>The development signals renewed momentum in NSE's listing plans, with the exchange beginning the process of identifying selling shareholders ahead of the public issue ...Read More</p> <p>Markets@2 | Sensex sheds 1341 points, Nifty at 22425</p> <p>The Sensex was down 1,341.31 points or 1.82 percent at 72,241.91, and the Nifty was down 394.30 points or 1.73 percent at 22,425.30. About 817 shares advanced, 3237 shares declined, and 122 shares unchanged.NSE Price Shockers (3 days)CompanyCMPChg(%)3 Days Ago Price Hilton Metal24.8444.0017.25 Flywings Simu198.0025.32158.00 Mawana Sugars93.6416.3880.46 Dalmia Sugar384.4516.31330.55 Dhampur Sugar142.1714.89123.74 Surani Steel Tu101.0013.6188.90 Globe Internati39.9713.0135.37 Rajshree Sugars30.0012.4426.68 Mirc Electronic27.5012.4324.46 Dwarikesh Sugar45.9312.3340.89 Shree Renuka27.8710.9925.11 ANTELOPUS573.0010.55518.30 Setco Auto19.8910.1318.06 Vital Chemtech42.9510.1339.00</p> <p>Bank Nifty falls: What it means for investors in bank funds</p> <p>The recent weakness in Bank Nifty warrants a measured response rather than a reactive one, says Nitin Agarwal of InCred Money....Read More</p> <p>Nifty50 Today | RailTel Corporation of India receives LoI worth Rs 444.44 crore</p> <p>The company has received a Letter of Intent (LoI) worth Rs 444.44 crore from the Centre for E-Governance. The order involves a request for proposal for the selection of a system integrator for KSWAN 3.0.Additionally, it has received a Letter of Acceptance (LoA) worth Rs 13.03 crore from the Mumbai Port Authority for SITC and O&M of a Hospital Management Information System (HMIS) for its hospital and dispensaries.Railtel Corporation of India was quoting at Rs 249.20, down Rs 11.05, or 4.25 percent.It has touched a 52-week low of Rs 249.10.It has touched an intraday high of Rs 261.50 and an intraday low of Rs 249.10.It was trading with volumes of 98,406 shares, compared to its five day average of 365,994 shares, a decrease of -73.11 percent.</p> <p>Nifty50 Today | Dixon Technologies arm gets approval under ECMS Dixon Technologies (India)'s wholly owned subsidiary, Dixon Display Technologies has been granted approval under the Electronics Component Manufacturing Scheme (ECMS), for undertaking Display module sub-assembly.Dixon Technologies was quoting at Rs 9,867.60, down Rs 152.65, or 1.52 percent. It has touched an intraday high of Rs 9,985 and an intraday low of Rs 9,795. It was trading with volumes of 56,598 shares, compared to its five day average of 55,835 shares, an increase of 1.37 percent.</p> <p>Vikas Gupta, CEO & Chief Investment Strategist at OmniScience Capital</p> <p>FY2026 had started on a positive note with March 2025 giving a solid base to the markets. The rally broadly continued until December 2025. From January 2026 the market started fumbling and after the start of the US-Israel-Iran war the markets have continued performing badly with oil prices exploding, FIIs continuously pulling out money, and accelerating the INR depreciation against the USD. The market has corrected nearly 11%-12% from the beginning of the war.The developments are concerning from a fundamental economic point of view. High oil prices are in itself concerning and the scenario of potential shortage of oil and gas supplies would make things fundamentally difficult for the economy and citizens. However, the successful efforts by the Government of India to secure the movement of Indian vessels carrying oil and gas in the Strait of Hormuz significantly reduces the probability of such a scenario.Barring the scenario of any significant shortages of oil and gas supplies to India, the situation looks very attractive from a long-term investment perspective. The current PE ratio of Nifty 50 is below 20 and the PB ratio is around 3.1. Similarly, the Nifty midcap and smallcap PE and PB ratios are significantly below their typical levels. Although, many darlings of Mr. Market still remain above their intrinsic values, as you go deeper into the index constituents many of them are reaching levels which could indicate significant discounts to their intrinsic values.From a 1, 3 and 5 year perspective the probability of returns higher than the long-term index returns is significantly enhanced. For an actively curated portfolio of stocks available below their intrinsic value, the probability of significant alpha over the next 3-5 years is very high at the end of FY26 and augurs a good beginning for FY27.</p> <p>Startup funding falls over 10% in FY26 as investors shift to early-stage AI bets from late-stage deals</p> <p>Indian startups have raised around $10.16 billion across 969 deals this fiscal against $11.34 billion in 1,020 deals in the previous year...Read More</p> <p>Nifty50 Today | Coal India bags LoA for 750 MWh BESS project from Telangana Power Generation Corp</p> <p>The company has received a Letter of Award (LoA) from Telangana Power Generation Corporation for setting up a 750 MWh (187.5 MW for 4 hours) BESS plant at Choutuppal, at a tariff of Rs 3.14 lakh per MW per month. The project cost is Rs 1,057.09 crore.Additionally, the company has formed a 50:50 joint venture, DVC CIL Power Private Limited, with Damodar Valley Corporation.</p> <p>Sensex Today | No windfall tax on upstream, positive for ONGC amid higher crude prices: Citi</p> <p>#1 Fuel tax changes provide relief to OMCs, cap refining upside for RIL#2 Excise duty cut by Rs 10/litre, reducing marketing losses for the OMCs#3 Export duty imposed of Rs 21.5/litre on diesel & Rs 29.5/litre on jet fuel</p> <p>Sensex Today | BSE FMCG index down 1.5%; AWL Agri, Sula Vineyards, Manorama Industries, among top losers</p> <p>BSE FMCG Top Stock Losers (Intra-day)CompanyCMPChg(%)Volume AWL Agri175.75-5.2407.44k Manorama Indust1,147.50-5.1710.39k Sula Vineyards142.15-5.0453.39k Sarveshwar Food2.54-4.87477.56k Linc89.10-4.811.03k Mukka Proteins18.80-4.6238.07k Parag Milk Food181.70-4.4789.26k Zydus Wellness426.35-4.4216.49k Chaman Lal Seti208.00-4.397.52k Sundrop Brands565.00-4.364.12k Andrew Yule15.95-4.26165.92k Sanstar76.23-4.1434.06k Colgate1,804.40-3.940.54k VST200.65-3.8622.80k Vadilal Ind4,123.95-3.78678 Dodla Dairy966.05-3.621.50k Eveready Ind261.45-3.612.50k KSE179.00-3.518.49k HMA Agro21.80-3.526.03k Lotus Chocolate562.00-3.366.26k</p> <p>Nifty50 Today | ULJK initiates 'buy' rating Shriram Pistons, target Rs 3,894</p> <p>Shriram Finance was quoting at Rs 879.25, down Rs 24.90, or 2.75 percent.It has touched an intraday high of Rs 896.55 and an intraday low of Rs 870.15.It was trading with volumes of 317,481 shares, compared to its five day average of 749,266 shares, a decrease of -57.63 percent.In the previous trading session, the share closed down 5.34 percent or Rs 51.05 at Rs 904.15.The share touched a 52-week high of Rs 1,108 and a 52-week low of Rs 566.40 on 26 February, 2026 and 29 August, 2025, respectively.Currently, the stock is trading 20.65 percent below its 52-week high and 55.23 percent above its 52-week low.Market capitalisation stands at Rs 165,436.64 crore.</p> <p>Currency Check | Rupee trades higher</p> <p>Indian rupee is trading higher by 21 paise at 94.60 per dollar against Friday's close of 94.81.</p> <p>Sensex Today | BSE Capital Goods index down 1.5%; AIA Engineering, Thermax, among top losers</p> <p>BSE Cap Goods Top Stock Gainers (Intra-day)CompanyCMPChg(%)Volume AIA Engineering3,605.004.65.26k Carborundum775.301.024.22k Thermax3,210.000.5513.04k Elgi Equipments475.550.3427.25k Bharat Elec405.100.09910.70k</p> <p>Nifty50 Today | Premier Energies commissions 5.6 GW solar facility</p> <p>Premier Energies, through its wholly owned subsidiary, Premier Energies Global Environment, has commissioned its 5.6 GW Solar Photovoltaic TOPCon module manufacturing facility at Seetharampur, Ranga Reddy District, Telangana with trial production commenced.Premier Energies was quoting at Rs 884.45, down Rs 9.35, or 1.05 percent.It has touched an intraday high of Rs 900.75 and an intraday low of Rs 874.60.It was trading with volumes of 95,018 shares, compared to its five day average of 0 shares, a decrease of percent. </p> <p>Nifty50 Today | Diamond Power Infrastructure bags order of Rs 43.93 crore</p> <p>The company has received a letter of intent from Uttar Gujarat Vij Company for supply of cables worth Rs 43,93,97,438.Diamond Power Infrastructure was quoting at Rs 121.35, down Rs 1.45, or 1.18 percent.It has touched an intraday high of Rs 124.45 and an intraday low of Rs 119.30.It was trading with volumes of 45,976 shares, compared to its five day average of 64,333 shares, a decrease of -28.53 percent.In the previous trading session, the share closed down 4.32 percent or Rs 5.55 at Rs 122.80.The share touched a 52-week high of Rs 185.10 and a 52-week low of Rs 86.50 on 17 July, 2025 and 09 May, 2025, respectively.Currently, the stock is trading 34.44 percent below its 52-week high and 40.29 percent above its 52-week low.Market capitalisation stands at Rs 6,394.79 crore.</p> <p>Sensex Today | Adani Green Energy operationalizes 951 MW power projects at Rajasthan</p> <p>Adani Green Energy through its various stepdown subsidiaries has commercially operationalized an aggregate 951 MW power projects at Baiya, Rajasthan (251 MW) and Khavda, Gujarat (700 MW).With commissioning of these plants, AGEL's total operational renewable generation capacity has increased to 18,933.3 MW.Adani Green Energy Limited was quoting at Rs 819.10, down Rs 13.35, or 1.60 percent. It has touched an intraday high of Rs 838.55 and an intraday low of Rs 815. It was trading with volumes of 112,204 shares, compared to its five day average of 85,550 shares, an increase of 31.16 percent.</p> <p>Sensex Today | Citi keeps 'buy' rating on Apollo Hospitals, target price at Rs 9,600</p> <p>#1 Hospital revenue growth seen at 16–17 percent in FY27/28 with 24–25 percent margin#2 Expansion on track, new capacity breakeven by FY27, EBITDA positive by FY28#3 West Asia impact minimal, recovery expected & Bangladesh volumes improving#4 Consumable inflation from rupee depreciation largely passed through#5 Apollo 24/7 nearing breakeven by Q1FY27, HealthCo growing around 17–18 percent CAGR#6 Keimed merger & listing may unlock value, remains preferred pickApollo Hospitals Enterprises was quoting at Rs 7,393.90, down Rs 154.50, or 2.05 percent. It has touched an intraday high of Rs 7,529.80 and an intraday low of Rs 7,363. It was trading with volumes of 29,424 shares, compared to its five day average of 20,355 shares, an increase of 44.55 percent.</p> <p>Nifty50 Today | Bharat Heavy Electricals bags order from NTPC</p> <p>Bharat Heavy Electricals (BHEL) has received a Notification of Award (NOA) from NTPC Limited for 3x800 MW Telangana Stage-II STPP (Main Plant Package).Bharat Heavy Electricals Limited (BHEL) emerged as a successful bidder for this project in Oct'24. Limited Notice to Proceed (LNTP) for this project was received in Nov' 2024 for initiating the basic engineering work of Main plant package.The broad consideration or size of the order is Rs 13,500 crore.Bharat Heavy Electricals was quoting at Rs 252.60, down Rs 2.25, or 0.88 percent. It has touched an intraday high of Rs 254.70 and an intraday low of Rs 248.35. It was trading with volumes of 357,568 shares, compared to its five day average of 340,297 shares, an increase of 5.08 percent.</p> <p>Sensex Today | CMS Info Systems acquires ATM managed services biz of Financial Software and Systems</p> <p>The company has announced the acquisition of the ATM managed services business of Financial Software and Systems (FSS) for Rs 115 crore. The transaction involves the transfer of operating assets and the novation of customer contracts, and is expected to close in Q1 FY27.Additionally, PPFAS Mutual Fund, through its schemes, acquired 1.5 lakh shares via an open market transaction on March 24, increasing its shareholding to 7.97 percent from 7.88 percent earlier.CMS Info Systems was quoting at Rs 271.55, up Rs 0.80, or 0.30 percent.It has touched a 52-week low of Rs 266.10.It has touched an intraday high of Rs 279.05 and an intraday low of Rs 266.10.It was trading with volumes of 52,993 shares, compared to its five day average of 23,495 shares, an increase of 125.55 percent.</p> <p>Markets@1 | Sensex slips 1050 points, Nifty at 22510</p> <p>The Sensex was down 1,058.14 points or 1.44 percent at 72,525.08, and the Nifty was down 309.55 points or 1.36 percent at 22,510.05. About 845 shares advanced, 3132 shares declined, and 141 shares unchanged.Advance/Decline (Intra-day)NIFTY 50;22,499.7</p> <p>Nifty Today | Avantel bags order of Rs 137 crore</p> <p>The company has received a supply order from the India Meteorological Department, Ministry of Earth Sciences, Government of India, for supply, warranty and COAMC of ‘Seven (7) Wind Profiler Systems'. The total value of the said order is Rs 137.12 crore.Avantel was quoting at Rs 126.70, up Rs 2.50, or 2.01 percent.It has touched an intraday high of Rs 129 and an intraday low of Rs 122.It was trading with volumes of 184,061 shares, compared to its five day average of 329,455 shares, a decrease of -44.13 percent.</p> <p>Chart of the Day | Why doing nothing in markets is often the smartest move</p> <p>Staying put through market turbulence has historically rewarded patient investors far more than acting on fear....Read More</p> <p>Nifty50 Today | KNR Constructions bags project of Rs 1,734 crore</p> <p> The company has received a Letter of Award from the National Highways Authority of India for the construction of a four-lane NH-167 stretch from Gudebellur to Mahabubnagar on the Hyderabad–Panaji section under NH(O) on a Hybrid Annuity Mode (HAM) basis in Telangana. The project cost is Rs 1,734 crore.KNR Constructions was quoting at Rs 118.35, up Rs 8.65, or 7.89 percent.It has touched an intraday high of Rs 123.50 and an intraday low of Rs 112.25.It was trading with volumes of 1,727,210 shares, compared to its five day average of 101,192 shares, an increase of 1,606.87 percent.</p> <p>Sensex Today | Jubilant Foodworks operations constrained by LPG shortage</p> <p>The company informed that due to the ongoing geopolitical situation in the Middle East, there are supply constraints on the distribution of commercial LPG across the country.Consequently, the supply of LPG cylinders to certain parts of the Company's store network has been constrained. Operational impact at this stage is limited and being actively managed.Jubilant Foodworks was quoting at Rs 440, down Rs 13.70, or 3.02 percent.It has touched a 52-week low of Rs 436.45.It has touched an intraday high of Rs 446.85 and an intraday low of Rs 436.45.</p> <p>Nifty50 Today | KJMC Capital initiates 'buy' rating on Shilchar Technologies</p> <p>Shilchar Technologies was quoting at Rs 3,622, up Rs 1.60, or 0.04 percent. It has touched an intraday high of Rs 3,653.95 and an intraday low of Rs 3,493.75. It was trading with volumes of 7,051 shares, compared to its five day average of 5,264 shares, an increase of 33.94 percent.</p> <p>Sub-brokers the weakest link in compliance? Unauthorised trades to profit-sharing schemes, NSE uncovers widespread AP violations</p> <p>Exchanges, in consultation with SEBI, were supposed to come up with a consultation paper to review APs regulation last year, as the working group had already submitted its report. A working group had recommended very stringent due diligence norms, The status of the consultation paper is not known....Read More</p> <p>Sensex Today | We Win bags order worth Rs 14.11 crore</p> <p>The company has received work order of Rs 14.11 crore for Selection of an Agency for establishment, operations and management of ICCC and District Helpdesks under the Surakshit Matritva Ashwashan (SUMAN) Program for National Health Mission, Madhya Pradesh.We Win was quoting at Rs 39.20, down Rs 0.30, or 0.76 percent.It has touched an intraday high of Rs 41.50 and an intraday low of Rs 37.50.In the previous trading session, the share closed down 9.96 percent or Rs 4.37 at Rs 39.50.The share touched a 52-week high of Rs 77.46 and a 52-week low of Rs 35.20 on 15 October, 2025 and 18 March, 2026, respectively.Currently, the stock is trading 49.39 percent below its 52-week high and 11.36 percent above its 52-week low.Market capitalisation stands at Rs 39.83 crore.</p> <p>Sensex Today | Sugar stocks in focus; Rajshree Sugars, Dwarikesh Sugar up 10-13%</p> <p>BSE Top Sectoral Gainers (Intra-day)CompanyCMPChg(%)Volume Rajshree Sugars29.613.6712238 Dwarikesh Sugar46.8610.91676302 Dalmia Sugar377.49.14171806 DBOL114.68.16102717 Mawana Sugars93.397.4130428 Shree Renuka28.226.651531231 Dhampur Sugar142.556.58105240 Magadh Sugar 481.14.341736 DCM Shriram Ind34.643.5312122 Ugar Sugar Work40.13.3214430 Avadh Sugar 4683.2812411 Rana Sugars12.023.2668304 KCP Sugar24.143.127022 Ponni Sugars(E)278.05310964 KM Sugar Mills26.092.5630534 Sakthi Sugars14.392.220036 Bajaj Hindustha16.862.182047638 SBEC Sugars302.18798 Uttam Sugar241.62.1812375 Ravalgaon Sugar8421.9324</p> <p>Nifty50 Today | Danish Power bags order</p> <p>The company has been awarded an order worth Rs 36.33 crore from reputed distribution utility company for supply of various ratings of distribution Transformers.Danish Power was quoting at Rs 575, down Rs 9.30, or 1.59 percent.It has touched a 52-week low of Rs 571.It has touched an intraday high of Rs 586 and an intraday low of Rs 571.</p> <p>Sensex Today | Nifty Realty Index drags more than 2%; extends fall on second day</p> <p>NIFTY Realty Top Stock Losers (Intra-day)CompanyCMPChg(%)Volume Brigade Ent648.75-6.131.13m Anant Raj417.25-4.581.91m Prestige Estate1,125.10-4.07508.89k Raymond330.65-3.47222.81k Lodha Developer677.25-3.281.61m DLF507.60-2.942.49m Sobha1,195.70-2.5949.29k Godrej Prop1,473.40-2.11649.55k Oberoi Realty1,437.00-1.37837.68k</p> <p>Sensex Today | Thermax arm wins order of Rs 1,600 crore</p> <p>The company's subsidiary, Thermax Babcock & Wilcox Energy Solutions, has secured a boiler package supply order valued at Rs 1,600 crore from a thermal power projects company in Central India for a 1x800 MW ultra-supercritical thermal power plant.Thermax was quoting at Rs 3,214.70, up Rs 22.35, or 0.70 percent. It has touched an intraday high of Rs 3,294.35 and an intraday low of Rs 3,145. It was trading with volumes of 11,686 shares, compared to its five day average of 12,705 shares, a decrease of -8.02 percent.</p> <p>Sensex Today | MP govt reverses decision, revokes 5-year Ban on Bank of Baroda</p> <p>The Government of Madhya Pradesh has revoked a five-year ban on Bank of Baroda from conducting state government business within 24 hours of issuing the initial order, according to CNBC-TV18.The initial order, issued by the Madhya Pradesh Institutional Finance Commissioner on March 27, cited alleged lapses in handling funds under the Chief Minister Kisan Yojana. According to the government letter, approximately Rs 1,751 crore was required to be deposited under a specific treasury receipt head.Bank Of Baroda was quoting at Rs 251.30, down Rs 8.65, or 3.33 percent. It has touched an intraday high of Rs 257.90 and an intraday low of Rs 250.85. It was trading with volumes of 232,179 shares, compared to its five day average of 389,702 shares, a decrease of -40.42 percent.</p> <p>Rentomojo co-founder Ajay Nain moves NCLT to halt IPO, alleges misleading share sale</p> <p>The petition seeks to void a 2023 stake sale involving Nain, restore shareholding, and restrain company from proceeding with Rs 150 crore public issue, it's DRHP showed....Read More</p> <p>Sensex Today | Gujarat Fluorochemicals subsidiary raises USD 80 million</p> <p>The company's subsidiary, GFCL EV, has raised USD 80 million from a global marquee investor, in addition to USD 50 million already raised from the International Finance Corporation (IFC).Gujarat Fluorochemicals Limited was quoting at Rs 2,997.25, down Rs 73.60, or 2.40 percent. It has touched an intraday high of Rs 3,055.45 and an intraday low of Rs 2,966.75. It was trading with volumes of 5,645 shares, compared to its five day average of 20,867 shares, a decrease of -72.95 percent.</p> <p>Nifty50 Today | Except metal, and oil & gas, all other indices trade lower</p> <p>BSE Indian Indices PerformanceIndexCMP Chg(%)YTD(%) 1 Week(%)1 Month(%) 1 Year(%) BSE Auto53007.12-1.6-15.270.06-12.8911.12 BSE Cap Goods64827.76-1.33-3.400.26-7.383.35 BSE FMCG16920.65-1.02-16.830.45-8.80-12.99 BSE Metal37243.391.111.173.70-8.0020.82 BSE Oil & Gas25814.440.63-10.082.57-10.862.71 BSE Realty5087.93-2.23-25.25-1.40-14.75-22.93 BSE IT28248.23-0.7-23.100.57-3.89-21.80 BSE Healthcare41954.23-1.12-4.221.52-4.091.29 BSE Power6746.65-0.753.740.22-1.632.40 BSE Cons Durables52918.21-1.48-11.811.65-8.50-2.69</p> <p>Nifty50 Today | USFDA issues one observation to Aarti Pharmalabs</p> <p>The United States Food and Drug Administration (USFDA) conducted an inspection of the company's Unit-IV in Palghar, Maharashtra, and issued a Form 483 with one observation, which is procedural in nature.Aarti Pharmalabs was quoting at Rs 598.10, down Rs 11.05, or 1.81 percent.It has touched an intraday high of Rs 609.15 and an intraday low of Rs 594.05.It was trading with volumes of 14,282 shares, compared to its five day average of 48,749 shares, a decrease of -70.70 percent.</p> <p>IRB Infra shares gain after turning ex-bonus: Here's why you should ignore the 50% crash</p> <p>April 1 has been fixed as the record date for determining eligible shareholders. ...Read More</p> <p>Sensex Today | JSW Steel arm acquires steel business undertaking of Bhushan Power and Steel</p> <p>The company's subsidiary, JSW Sambalpur Steel, has acquired the steel business undertaking of Bhushan Power and Steel (BPSL) by way of a slump sale on a going concern basis.JSW Steel was quoting at Rs 1,126, down Rs 4.90, or 0.43 percent.It has touched an intraday high of Rs 1,135 and an intraday low of Rs 1,115.It was trading with volumes of 36,821 shares, compared to its five day average of 67,414 shares, a decrease of -45.38 percent.In the previous trading session, the share closed down 2.19 percent or Rs 25.35 at Rs 1,130.90.The share touched a 52-week high of Rs 1,284.55 and a 52-week low of Rs 907.25 on 25 February, 2026 and 07 April, 2025, respectively.Currently, the stock is trading 12.34 percent below its 52-week high and 24.11 percent above its 52-week low.Market capitalisation stands at Rs 275,358.12 crore.</p> <p>Markets@12 | Sensex tanks 1100 points, Nifty around 22500</p> <p>The Sensex was down 1,102.55 points or 1.50 percent at 72,480.67, and the Nifty was down 317.55 points or 1.39 percent at 22,502.05. About 822 shares advanced, 3110 shares declined, and 133 shares unchanged.NSE Price Shockers (3 days)CompanyCMPChg(%)3 Days Ago Price Hilton Metal24.5642.3817.25 Flywings Simu192.0021.52158.00 Mawana Sugars93.2215.8680.46 Dwarikesh Sugar47.3015.6840.89 Dalmia Sugar378.3514.46330.55 Dhampur Sugar140.8713.84123.74 Globe Internati40.2013.6635.37 Shree Renuka28.2512.5025.11 Mirc Electronic27.3611.8624.46 Setco Auto19.8910.1318.06 Vital Chemtech42.9510.1339.00</p> <p>Nifty50 Today | Ceigall India receives LoA from NHAI</p> <p>The company's subsidiary, Ceigall Infra Projects (CIPPL), has received a Letter of Award (LoA) from the National Highways Authority of India for the construction of a six-lane access-controlled spur connectivity project in Punjab on a Hybrid Annuity Mode basis. The project cost is Rs 603 crore.Ceigall India was quoting at Rs 271.25, up Rs 2.90, or 1.08 percent.It has touched an intraday high of Rs 271.75 and an intraday low of Rs 263.05.It was trading with volumes of 12,025 shares, compared to its five day average of 70,392 shares, a decrease of -82.92 percent.</p> <p>Sensex Today | Nifty Bank index slips nearly 3%; IndusInd Bank, AU Small Finance Bank, Union Bank of India, among top losers</p> <p>NIFTY BANK Top Stock Losers (Intra-day)CompanyCMPChg(%)Volume IndusInd Bank755.75-4.643.18m AU Small Financ843.60-4.441.27m Union Bank168.30-4.0912.27m Yes Bank17.40-3.9770.23m Canara Bank125.61-3.7112.69m Axis Bank1,162.60-3.537.21m Bank of Baroda251.20-3.55.62m IDFC First Bank59.75-3.4321.92m PNB101.80-3.1710.75m Kotak Mahindra354.95-3.0613.67m SBI990.30-2.867.54m Federal Bank262.35-2.583.28m HDFC Bank742.00-1.8837.51m ICICI Bank1,214.00-1.66.70m</p> <p>Sensex Today | JNK India bags order worth Rs 300–600 crore</p> <p>The company has received a major order worth Rs 300–600 crore from JNK Global Co, Korea, for providing support services and supplies for a cracker furnace package for a refinery project in India.JNK India was quoting at Rs 207.50, down Rs 10.50, or 4.82 percent.It has touched an intraday high of Rs 241.40 and an intraday low of Rs 207.40.It was trading with volumes of 266,504 shares, compared to its five day average of 1,670 shares, an increase of 15,856.41 percent.</p> <p>Sensex Today | TVS Holdings invests Rs 526.79 crore in Home Credit India Finance</p> <p>The company has invested Rs 526.79 crore in Home Credit India Finance by acquiring an additional 22.91 crore equity shares, raising its stake to 80.39 percent.TVS Holdings was quoting at Rs 13,939, down Rs 82.50, or 0.59 percent.It has touched an intraday high of Rs 14,277.50 and an intraday low of Rs 13,699.95.In the previous trading session, the share closed down 0.46 percent or Rs 65.15 at Rs 14,021.50.The share touched a 52-week high of Rs 16,150 and a 52-week low of Rs 7,755 on 18 November, 2025 and 07 April, 2025, respectively.Currently, the stock is trading 13.69 percent below its 52-week high and 79.74 percent above its 52-week low.Market capitalisation stands at Rs 28,201.53 crore.</p> <p>Kotak restructures portfolio post sell-off; adds DLF, Info Edge, Coforge</p> <p>Kotak Institutional Equities said the recent market correction has improved valuations and created opportunities across stocks, prompting it to split its model portfolio into separate large-cap and mid-cap baskets. The brokerage added names such as Coforge, Embassy REIT and DLF, while adjusting weights in Reliance Industries and Mahindra & Mahindra...Read More</p> <p>Sensex Today | TVS Motor Company share price trades ex-dividend</p> <p>TVS Motor Company was quoting at Rs 3,375.35, down Rs 68.40, or 1.99 percent.It has touched an intraday high of Rs 3,411.35 and an intraday low of Rs 3,365.It was trading with volumes of 6,613 shares, compared to its five day average of 23,885 shares, a decrease of -72.31 percent.In the previous trading session, the share closed down 2.80 percent or Rs 99.05 at Rs 3,443.75.The share touched a 52-week high of Rs 3,970 and a 52-week low of Rs 2,221.05 on 26 February, 2026 and 07 April, 2025, respectively.Currently, the stock is trading 14.98 percent below its 52-week high and 51.97 percent above its 52-week low.Market capitalisation stands at Rs 160,358.53 crore.</p> <p>Nifty50 Today | Goldman Sachs keeps 'neutral' rating on HPCL & BPCL</p> <p>#1 Rs 10/litre duty cut offers limited relief#2 Breakeven at USD 78/bbl vs current USD 122/bbl#3 EBITDA losses remain elevated#4 HPCL gets partial support from export tax#5 CY27 brent seen at USD 80/bbl, risk-reward weak#6 Risk-reward least favourable for IOC (Sell), with 49 percent/20 percent downside in bear/base casesBSE Oil & Gas Top Stock Gainers (Intra-day)CompanyCMPChg(%)Volume Oil India487.551.94243.02k GAIL139.551.75299.03k ONGC286.551.631.70m Petronet LNG249.801.5482.92k Reliance1,349.650.1593.10kBSE Oil & Gas Top Stock Losers (Intra-day)CompanyCMPChg(%)Volume Adani Total Gas517.70-2.22409.54k IGL145.65-1.7583.63k IOC137.10-0.471.08m HINDPETRO339.45-0.38138.04k BPCL282.20-0.12344.18k</p> <p>Sensex Today | Axis Capital initiates 'buy' rating on Meesho, target Rs 195</p> <p>Meesho was quoting at Rs 143.15, down Rs 2.60, or 1.78 percent.It has touched an intraday high of Rs 145.70 and an intraday low of Rs 141.85.It was trading with volumes of 166,280 shares, compared to its five day average of 419,924 shares, a decrease of -60.40 percent.In the previous trading session, the share closed down 2.70 percent or Rs 4.05 at Rs 145.75.The share touched a 52-week high of Rs 254.65 and a 52-week low of Rs 125.70 on 18 December, 2025 and 16 March, 2026, respectively.Currently, the stock is trading 43.79 percent below its 52-week high and 13.88 percent above its 52-week low.Market capitalisation stands at Rs 64,814.63 crore.</p> <p>Sensex Today | Avendus Spark upgrades Grindwell Norton to 'add', target Rs 1,523</p> <p>Grindwell Norton was quoting at Rs 1,366.70, down Rs 1.25, or 0.09 percent.It has touched an intraday high of Rs 1,375.65 and an intraday low of Rs 1,345.00.It was trading with volumes of 866 shares, compared to its five day average of 6,844 shares, a decrease of -87.35 percent.</p> <p>Most active smallcap stocks today</p> <p>NIFTY Smallcap 100 Most Active StocksCompanyCMP Chg(%)VolumeValue(Rs cr) MCX India2,358.40-1.661.47m347.54 Hind Copper465.55-5.655.45m257.89 Godfrey Phillip1,879.90-1.121.16m222.91 Kaynes Tech3,491.40-3.35598.24k211.41 Garden Reach Sh2,018.00-2.44973.06k202.41</p> <p>Aluminium firm shares up; Hindalco top gainer in Nifty 50</p> <p>Shares of aluminium companies Hindalco Industries, National Aluminium Co., and Vedanta were 2-5% higher Monday. The move comes due to a significant rise in aluminium prices after smelters in the United Arab Emirates and Bahrain were hit by Iran strikes. Emirates Global Aluminium and Aluminium Bahrain sustained attacks. Hindalco Industries gained the most in the benchmark Nifty 50 index, up 3%.</p> <p>IRB Infra down 51% as it trades ex-bonus</p> <p>Shares of IRB Infrastructure Developers fell nearly 51% to a low of INR 20.10. The shares of the company were adjusting for the 1-for-1 bonus issue of shares.</p> <p>Negative breakout stocks today</p> <p>Negative Break-outsCompanyCMPChg(%)150 SMA Beacon Trustees70.5-7.1575.93 City Union Bank238.1-5.87252.94 A2Z Infra Eng15.69-4.6816.46 Quality Power796.15-4.56834.16 CP37.21-3.538.56</p> <p>Markets@11 | Sensex slips 1100 points, Nifty below 22500</p> <p>The Sensex was down 1,099.59 points or 1.49 percent at 72,483.63, and the Nifty was down 324.40 points or 1.42 percent at 22,495.20. About 830 shares advanced, 2999 shares declined, and 151 shares unchanged.NSE Volume ShockersCompanyCMP Chg(%)Today Vol 5D Avg VolVol Chg(%) R M Drip Spri36.00 -4.59%1.50m9,800.0015,182.00 JNK India219.99 0.39%1.71m26,910.806,240.00 KNR Construct118.00 7.64%53.22m1,728,675.002,979.00 HDFC NiftyNext62.20 -1.57%1.06m36,327.402,832.00 Atal21.23 -1.48%2.19m100,889.202,067.00 SRG Housing Fin234.80 0.95%76.43k3,632.602,004.00 Cool Caps28.35 -4.87%171.25k8,400.001,939.00 BEW Eng66.80 -4.91%21.50k1,125.001,811.00 Jeena Sikho539.95 -2.47%354.10k18,612.001,803.00 ABSL SIL ETF223.19 1.19%1.33m78,904.201,592.00 G-Tec Jainx18.24 -6.08%40.12k4,030.40895.00 Ganesha Ecosph825.50 5.74%1.55m155,612.40894.00 HDFC NiftyBank52.21 -1.62%386.07k41,090.60840.00 Khadim India81.03 -3.68%147.06k18,435.00698.00 Dhunseri Invest736.30 8.05%37.17k4,781.80677.00 HDFC Nifty 250144.59 -2.51%2.91m436,878.60566.00 EPL199.00 0.21%4.00m607,375.20558.00 MOQUALITY179.19 -0.62%26.98k4,128.80553.00 G R Infra814.00 1.18%187.11k30,801.60507.00 UTKARSHBNK10.70 -3.08%5.97m1,045,114.80472.00</p> <p>Nifty50 Today | Cineline India commences new 2-screen multiplex “MovieMax” in Chennai</p> <p>Cineline India was quoting at Rs 80.00, down Rs 1.56, or 1.91 percent.It has touched an intraday high of Rs 82.98 and an intraday low of Rs 79.19.It was trading with volumes of 254 shares, compared to its five day average of 2,631 shares, a decrease of -90.35 percent.</p> <p>Sensex Today | BSE Auto index slips 1.5%, extends fall on second day</p> <p>BSE Auto Top Stock Losers (Intra-day)CompanyCMPChg(%)Volume Ashok Leyland156.95-3.71317.89k MRF125,152.00-3.34263 Amara Raja679.40-3.1750.55k Balkrishna Ind2,087.20-2.944.88k Bharat Forge1,676.05-2.8113.41k MOTHERSON106.40-2.74448.89k Hyundai Motor1,768.00-2.5734.12k Exide Ind293.10-2.5641.60k M&M2,977.45-2.0933.12k TVS Motor3,372.25-2.085.42k Apollo Tyres403.40-29.70k Bosch29,040.00-1.99715 Sona BLW481.05-1.5167.22k Eicher Motors6,705.00-1.516.29k Hero Motocorp5,075.00-1.368.08k Tube Investment2,533.80-1.286.94k TMPV299.60-1.19669.37k Bajaj Auto8,817.35-0.963.88k Maruti Suzuki12,319.95-0.555.86k UNO Minda1,042.25-0.545.12k</p> <p>Nifty50 Today | JPMorgan upgrades HDFC Bank to 'overweight', target Rs 1,010</p> <p>HDFC Bank was quoting at Rs 746.10, down Rs 10.15, or 1.34 percent.It has touched a 52-week low of Rs 738.35.It has touched an intraday high of Rs 751.15 and an intraday low of Rs 738.35.It was trading with volumes of 2,009,238 shares, compared to its five day average of 4,412,215 shares, a decrease of -54.46 percent.</p> <p>Sensex Today | Avendus Spark upgrades Carborundum Universal to 'reduce', target Rs 696</p> <p>Carborundum Universal was quoting at Rs 765.50, down Rs 2, or 0.26 percent.It has touched an intraday high of Rs 770 and an intraday low of Rs 745.05.It was trading with volumes of 2,528 shares, compared to its five day average of 58,119 shares, a decrease of -95.65 percent.</p> <p>Vedanta moves Supreme Court seeking stay on Adani Group's plan for Jaypee Assets</p> <p>The NCLAT last week refused to stay Adani Group's resolution plan, prompting Vedanta to move the Supreme Court....Read More</p> <p>Currency Check | Rupee erases early gains, still trades higher</p> <p> The Indian rupee erased most of its opening gains but continued to trade higher by 35 paise at 94.46 per dollar against Friday's close of 94.81.</p> <p>Markets slide across equities, gold and silver: Why asset allocation rules are back in focus</p> <p>Equities continue to form the core of long-term wealth creation, especially after recent corrections that have made valuations more reasonable in select pockets. However, the key is not just equity exposure, but diversification within it. ...Read More</p> <p>Sensex Today | BSE Power index down 1%, Torrent Power, Siemens, JSW Energy, among top losers</p> <p>BSE Power Top Stock Losers (Intra-day)CompanyCMPChg(%)Volume Torrent Power1,318.50-2.5713.67k Siemens2,975.60-2.427.27k JSW Energy473.10-2.3825.13k Suzlon Energy39.86-2.33.18m ABB India5,990.00-1.915.14k NHPC75.17-1.83256.48k Reliance Power20.96-1.833.11m Hitachi Energy24,263.00-1.733.18k GE Vernova TD3,695.00-1.68.01k BHEL251.00-1.51197.74k Tata Power380.10-1.45226.50k Adani Green Ene821.00-1.3878.89k CG Power 660.15-1.1540.56k Adani Power152.20-1.07579.49k NTPC374.30-0.43178.23k Thermax3,185.50-0.216.08k</p> <p>Nifty50 Today | Syngene International's MD, CEO resigns</p> <p>Peter Bains has resigned from the position of Managing Director and Chief Executive Officer, effective June 30, 2026. The board has appointed Siddharth Mittal as an Additional Director, designated as Managing Director and Chief Executive Officer, and a member of the Executive Committee, effective July 1, subject to shareholder approval.The board also announced a change in the role of Kiran Mazumdar-Shaw from Non-Executive Chairperson to Executive Chairperson.Syngene International was quoting at Rs 394.95, down Rs 19.10, or 4.61 percent.It has touched an intraday high of Rs 410.00 and an intraday low of Rs 391.85.It was trading with volumes of 32,791 shares, compared to its five day average of 50,938 shares, a decrease of -35.63 percent.</p> <p>Shivani Nyati, Head of Wealth at Swastika Investmart</p> <p>Coal India Limited's subsidiary CMPDI had a weak market debut, listing at a discount to its issue price of ₹172, opening at ₹160 on NSE and ₹162.80 on BSE.The IPO saw a muted response with an overall subscription of just 1.05x, largely driven by QIBs, while retail and HNI participation remained weak, reflecting cautious investor sentiment.Since the issue was entirely an offer for sale (OFS), the company did not receive any fresh capital, which also limited investor enthusiasm.CMPDI operates as a specialized consultancy and technical services provider in the coal and mining sector, offering services such as coal and mineral exploration, mine planning and design, environmental studies, laboratory testing, coal beneficiation, and mine closure solutions, while also acting as a key advisor to Coal India and supporting the Ministry of Coal in strategic initiatives.In the short term, the stock is likely to remain sentiment-driven and may witness further downside or sideways movement, especially if broader market conditions stay weak. Technically, the ₹155–150 zone acts as a key support, while ₹170–175 is a resistance zone, so short-term traders can keep a stop loss below ₹150, and conservative IPO investors may also maintain a stop loss around ₹148–150. While the company has a stable business and a strong position within the coal ecosystem, a cautious approach is advisable in the near term.</p> <p>Sensex Today | IRB Infrastructure Developers and Triton Valves share trades ex-bonus</p> <p>IRB Infrastructure Developers was quoting at Rs 22.37, up Rs 1.90, or 9.28 percent.It has touched an intraday high of Rs 22.70 and an intraday low of Rs 20.13.It was trading with volumes of 2,585,978 shares, compared to its five day average of 813,288 shares, an increase of 217.97 percent.Triton Valves was quoting at Rs 842.00, down Rs 16.14, or 1.88 percent.It has touched an intraday high of Rs 908.80 and an intraday low of Rs 824.55.It was trading with volumes of 2,285 shares, compared to its five day average of 2,400 shares, a decrease of -4.78 percent.</p>"
+    },
+    "articleimages": {
+      "count": 1,
+      "articleimage": [
+        {
+          "url": "https://images.moneycontrol.com/images/common/mc_logo_200x200.png"
+        }
+      ]
+    },
+    "caption": {
+      "text": " "
+    },
+    "quotes": [],
+    "url": "https://www.moneycontrol.com/sports/cricket/live-cricket-scorecard/royal-challengers-bengaluru-vs-sunrisers-hyderabad/13469/Footer|Sensex|Trending%20Topics|https://www.moneycontrol.com/news/business/markets/sensex-today-stock-market-live-updates-nifty50-share-price-crude-fii-gift-nifty-rupee-latest-updates-30-03-2026-liveblog-13873899.html",
+    "orig_url": "https://www.moneycontrol.com/sports/cricket/live-cricket-scorecard/royal-challengers-bengaluru-vs-sunrisers-hyderabad/13469/Footer|Sensex|Trending%20Topics|https://www.moneycontrol.com/news/business/markets/sensex-today-stock-market-live-updates-nifty50-share-price-crude-fii-gift-nifty-rupee-latest-updates-30-03-2026-liveblog-13873899.html",
+    "url_common": "moneycontrol.com",
+    "screenshots": []
+  },
+  {
+    "id_site": 466985,
+    "id_article": 142201,
+    "hidden": false,
+    "position": 5,
+    "timezone": "Asia/Kolkata",
+    "countrycode": "IN",
+    "countryname": "India",
+    "similarweb": {
+      "domain": "marketsmojo.com"
+    },
+    "site_rank": {
+      "rank_global": 8746,
+      "rank_country": 359
+    },
+    "unix_timestamp": 1774901409,
+    "mediatype": {
+      "timemap": false,
+      "clip": false,
+      "hastext": true,
+      "haslogo": false,
+      "paywall": false,
+      "fulltext": true,
+      "text": "WEB"
+    },
+    "circulation": 10,
+    "internal_search_reply": {
+      "id_site": 466985,
+      "id_article": 142201,
+      "text": ""
+    },
+    "stimestamp": 372582238,
+    "stimestamp_index": 372582238,
+    "local_time": {
+      "GMT": 1,
+      "text": "20260330T22:10:09+0200"
+    },
+    "local_rcf822_time": {
+      "text": "Mon, 30 Mar 2026 22:10:09 +0200"
+    },
+    "distribute_conditions": "",
+    "content_protected": 0,
+    "language": {
+      "encoding": "iso-639",
+      "text": "en"
+    },
+    "word_count": 713,
+    "first_source": {
+      "id": 4414879,
+      "name": "Markets Mojo",
+      "sitename": "Markets Mojo",
+      "url": "https://www.marketsmojo.com",
+      "siteurl": "https://www.marketsmojo.com"
+    },
+    "header": {
+      "matches": false,
+      "text": "Why is Geojit Financial Services Ltd falling/rising?"
+    },
+    "summary": {
+      "matches": false,
+      "text": "  As of 30-Mar, Geojit Financial Services Ltd's stock price has fallen sharply, reflecting a combination of disappointing financial results, declining"
+    },
+    "body": {
+      "matches": false,
+      "text": "<p>profitability, and waning promoter confidence, all contributing to its underperformance relative to the broader market and sector peers.</p> <p> Recent Price Performance and Market Context</p> <p> The stock has been under significant pressure over the past month, declining by 15.14%, considerably worse than the Sensex's 10.33% fall during the same period. Year-to-date, Geojit's shares have plummeted by 29.26%, nearly double the benchmark's 15.57% decline. This underperformance extends over the last year, where the stock has lost 26.47% compared to the Sensex's modest 7.06% drop. Despite a positive three-year return of 47.34%, the recent trend is clearly negative.</p> <p> On the day in question, the stock hit a new 52-week low of ₹51.62, underscoring the bearish momentum. Intraday trading saw the price dip as much as 7.44%, with heavier volumes concentrated near these lows, signalling strong selling pressure. The stock is trading below all key moving averages – 5-day, 20-day, 50-day, 100-day, and 200-day – which typically indicates a sustained downtrend. Furthermore, the Finance/NBFC sector itself declined by 3.9%, adding to the headwinds faced by Geojit.</p> <p> Strong fundamentals, solid momentum, fair price – This Large Cap from the NBFC sector checks every box for our Top 1%. This should definitely be on your radar!</p> <p> - Complete fundamentals package</p> <p> - Technical momentum confirmed</p> <p> - Reasonable valuation entry</p> <p> Fundamental Challenges Weighing on the Stock</p> <p> Despite a respectable long-term Return on Equity (ROE) averaging 17.31%, the company's recent financial performance has been disappointing. Over the past year, profits have contracted sharply by 46%, signalling operational difficulties. Operating profit growth has been virtually stagnant, with an annualised decline of 0.04%, reflecting a lack of momentum in core business activities.</p> <p> Geojit has reported negative results for four consecutive quarters. The Profit Before Tax excluding other income (PBT LESS OI) for the latest quarter stood at ₹25.26 crore, down 32.6% compared to the previous four-quarter average. Earnings before interest, depreciation, and taxes (PBDIT) reached a low of ₹37.83 crore, while Profit After Tax (PAT) dropped to ₹19.88 crore, the lowest in recent periods. These figures highlight a clear deterioration in profitability and operational efficiency.</p> <p> Investor Sentiment and Promoter Actions</p> <p> Investor confidence appears to be waning, as evidenced by the promoters reducing their stake by 13.25% in the previous quarter, now holding 38.48% of the company. Such a significant reduction in promoter shareholding often signals diminished confidence in the company's near-term prospects and can exacerbate negative market sentiment.</p> <p> Additionally, the stock has underperformed not only the broader market but also its sector peers, which may be contributing to the increased selling pressure. The rising delivery volume of 6.67 lakh shares on 27 March, an 88.47% increase over the five-day average, suggests heightened investor participation on the sell side.</p> <p> Geojit Fin. Ser. or something better? Our SwitchER feature analyzes this Smallcap Capital Markets stock and recommends superior alternatives based on fundamentals, momentum, and value!</p> <p> - SwitchER analysis complete</p> <p> - Superior alternatives found</p> <p> - Multi-parameter evaluation</p> <p> Valuation and Liquidity Considerations</p> <p> On valuation metrics, Geojit trades at a Price to Book Value of 1.3, which is attractive relative to its peers' historical averages. This discount could offer some appeal to value investors, but the ongoing profit decline and weak growth prospects overshadow this advantage. Liquidity remains adequate, with the stock's traded value supporting reasonable trade sizes, yet the prevailing negative momentum is likely to deter fresh buying in the short term.</p> <p> In summary, the sharp decline in Geojit Financial Services Ltd's share price on 30 March is primarily driven by disappointing quarterly results, sustained profit contraction, and a notable reduction in promoter shareholding. These factors, combined with broader sector weakness and underperformance relative to benchmarks, have culminated in a bearish outlook reflected in the stock's recent price action.</p> <p> Limited Time Only! Subscribe for Rs. 12,999 and get 1 Year of MojoOne + an Additional Year Completely FREE. Don't miss out on this exclusive offer. Claim Your Free Year →</p>"
+    },
+    "caption": {
+      "text": " "
+    },
+    "quotes": [],
+    "url": "https://www.marketsmojo.com/news/stocks-in-action/why-is-geojit-financial-services-ltd-fallingrising-3926891",
+    "orig_url": "https://www.marketsmojo.com/news/stocks-in-action/why-is-geojit-financial-services-ltd-fallingrising-3926891",
+    "url_common": "marketsmojo.com",
+    "screenshots": []
+  }
+]
