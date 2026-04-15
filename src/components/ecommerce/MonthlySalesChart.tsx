@@ -2,158 +2,93 @@
 
 import { useEffect, useState } from "react";
 
-export default function MonthlySalesChart() {
-  const [groups, setGroups] = useState<any>({});
-  const [filteredNews, setFilteredNews] = useState<any[]>([]);
-  const [activeKeyword, setActiveKeyword] = useState<string>("");
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+type Article = {
+  title: string;
+  summary: string;
+  url: string;
+  source: string;
+  published_at: number;
+  matched_keywords: string[];
+};
 
-  const keywords = [
-    "ICICI Securities",
-    "Geojit",
-    "Kotak Securities",
-    "Motilal Oswal Group",
-    "Finance",
-    "Zerodha",
-  ];
+type Grouped = {
+  [key: string]: Article[];
+};
 
-  const clean = (t: any) =>
-    typeof t === "string" ? t.replace(/<[^>]+>/g, "") : "";
+export default function NewsDashboard() {
+  const [grouped, setGrouped] = useState<Grouped>({});
+  const [selected, setSelected] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    fetch("/api/opoint-news")
+    fetch("/api/opointNews")
       .then((res) => res.json())
       .then((data) => {
-        setGroups(data.groups || {});
+        const map: Grouped = {};
+        console.log("data", data)
+        data.articles.forEach((a: Article) => {
+          a.matched_keywords.forEach((k) => {
+            if (!map[k]) map[k] = [];
+            map[k].push(a);
+          });
+        });
+
+        setGrouped(map);
       });
   }, []);
 
-  // ✅ FILTER: ALL COMBINATIONS FOR SELECTED KEYWORD
-  const handleKeywordClick = (keyword: string) => {
-    // toggle (click again = reset)
-    if (activeKeyword === keyword) {
-      setActiveKeyword("");
-      setFilteredNews([]);
-      return;
-    }
-
-    setActiveKeyword(keyword);
-    setOpenIndex(null);
-
-    let result: any[] = [];
-
-    Object.keys(groups).forEach((key) => {
-      const words = key.split(" + ");
-
-      // ✅ Include ALL combinations containing keyword
-      if (words.includes(keyword)) {
-        result = [...result, ...groups[key]];
-      }
-    });
-
-    // ✅ Remove duplicates
-    const unique = Array.from(
-      new Map(result.map((item) => [item.title, item])).values()
-    );
-
-    // ✅ Sort latest
-    unique.sort(
-      (a: any, b: any) =>
-        (b.published_at || 0) - (a.published_at || 0)
-    );
-
-    setFilteredNews(unique);
-  };
+  const articles = selected ? grouped[selected] || [] : [];
 
   return (
-    <div className="p-5 space-y-4">
-      <h2 className="text-xl font-bold">📊 Multi Keyword News</h2>
+    <div className="flex h-screen">
 
-      {/* ✅ KEYWORD BUTTONS ONLY */}
-      <div className="flex gap-2 flex-wrap">
-        {keywords.map((k) => (
-          <button
+      {/* SIDEBAR */}
+      <div className="w-60 bg-gray-100 p-4">
+        {Object.keys(grouped).map((k) => (
+          <div
             key={k}
-            onClick={() => handleKeywordClick(k)}
-            className={`px-3 py-1 rounded ${
-              activeKeyword === k
-                ? "bg-blue-600 text-white"
-                : "bg-gray-200"
-            }`}
+            onClick={() => {
+              setSelected(k);
+              setOpen(false);
+            }}
+            className="p-2 cursor-pointer hover:bg-gray-200"
           >
             {k}
-          </button>
+          </div>
         ))}
       </div>
 
-      {/* ✅ NEWS LIST */}
-      {filteredNews.map((n, i) => (
-        <div
-          key={i}
-          className="border rounded-xl p-4 shadow hover:shadow-lg transition"
-        >
-          <div
-            onClick={() =>
-              setOpenIndex(openIndex === i ? null : i)
-            }
-            className="cursor-pointer"
-          >
-            <h3 className="text-blue-600 font-semibold">
-              {clean(n.title)}
-            </h3>
+      {/* CONTENT */}
+      <div className="flex-1 p-5">
 
-            <p className="text-xs text-gray-500">
-              {n.source} •{" "}
-              {n.published_at
-                ? new Date(n.published_at).toLocaleString()
-                : ""}
-            </p>
-          </div>
-
-          {n.image_url && (
-            <img
-              src={n.image_url}
-              className="w-full h-40 object-cover rounded mt-2"
-            />
-          )}
-
-          <p className="text-sm mt-2">
-            {clean(n.summary).slice(0, 150)}...
-          </p>
-
-          {openIndex === i && (
-            <div className="mt-3 bg-gray-50 p-3 rounded text-xs space-y-1">
-              <p><b>Author:</b> {n.article_details.author}</p>
-              <p><b>Website:</b> {n.article_details.website}</p>
-              <p><b>Word Count:</b> {n.article_details.word_count}</p>
-
-              <p><b>🌍 Global Rank:</b> {n.article_details.global_rank}</p>
-              <p><b>🇮🇳 Country Rank:</b> {n.article_details.country_rank}</p>
-
-              <a
-                href={n.url}
-                target="_blank"
-                className="inline-block mt-2 px-3 py-1 bg-blue-500 text-white rounded"
-              >
-                Read Full Article
-              </a>
+        {selected && (
+          <>
+            {/* CARD */}
+            <div
+              className="border p-4 flex justify-between cursor-pointer"
+              onClick={() => setOpen(!open)}
+            >
+              <div>
+                {selected} Unique (
+                {new Set(articles.map((a) => a.title)).size})
+                Total ({articles.length})
+              </div>
+              <div>{open ? "⌄" : ">"}</div>
             </div>
-          )}
-        </div>
-      ))}
 
-      {/* ✅ EMPTY STATE */}
-      {activeKeyword === "" && (
-        <p className="text-gray-500 text-sm">
-          Select a keyword to view news
-        </p>
-      )}
-
-      {activeKeyword && filteredNews.length === 0 && (
-        <p className="text-gray-500 text-sm">
-          No news found for "{activeKeyword}"
-        </p>
-      )}
+            {/* EXPAND */}
+            {open &&
+              articles.map((a, i) => (
+                <div key={i} className="border p-3 mt-2">
+                  <p className="font-semibold text-blue-600">
+                    {a.title}
+                  </p>
+                  <p className="text-xs">{a.source}</p>
+                </div>
+              ))}
+          </>
+        )}
+      </div>
     </div>
   );
 }
