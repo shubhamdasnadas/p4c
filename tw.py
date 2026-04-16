@@ -3,6 +3,12 @@ import json
 import requests
 from datetime import datetime, timezone, timedelta
 from pymongo import MongoClient
+from collections import Counter, defaultdict
+
+# NLP
+import nltk
+from nltk.corpus import stopwords
+from textblob import TextBlob
 
 # ─── CONFIG ───────────────────────────────────────────────────────────────────
 API_TOKEN = "070e1d57bb0817a34d5d62a4c58a20eee85a3a30"
@@ -19,18 +25,25 @@ IST = timezone(timedelta(hours=5, minutes=30))
 # ─── MONGODB CONFIG ───────────────────────────────────────────────────────────
 MONGO_URI = "mongodb://localhost:27017/my_python?tls=false"
 client = MongoClient(MONGO_URI)
-
 db = client["my_python"]
-
 collection = db["opoint_articles"]
 
-# ─── KEYWORD GROUP MAPPING (NEW) ──────────────────────────────────────────────
+# ─── NLP SETUP ────────────────────────────────────────────────────────────────
+nltk.download('punkt')
+nltk.download('stopwords')
+STOP_WORDS = set(stopwords.words("english"))
+
+# ─── KEYWORD GROUP MAPPING ────────────────────────────────────────────────────
 KEYWORD_GROUP_MAP = {
     "Kotak Securities": ['Kotak Securities', 'कोटक सिक्योरिटीज'],
     "Geojit": ['Geojit', 'जियोजित'],
     "ICICI Securities": ['ICICI Securities', 'आईसीआईसीआई सिक्योरिटीज'],
     "Indiainfoline": ['Indiainfoline', 'इंडिया इंफोलाइन'],
-    "Motilal Oswal Group": ['Motilal Oswal', 'मोतीलाल ओसवाल']
+    "Motilal Oswal Group": ['Motilal Oswal', 'मोतीलाल ओसवाल'],
+    "Zerodha": ['Zerodha', 'ज़ेरोधा'],
+    "Prudent": ['Prudent'],
+    "Angel One": ['Angel One'],
+    "Groww": ['Groww'],
 }
 
 def normalize_keyword(keyword: str) -> str:
@@ -39,10 +52,8 @@ def normalize_keyword(keyword: str) -> str:
             return main
     return keyword
 
-
 # ─── HELPERS ──────────────────────────────────────────────────────────────────
-
-def get_text(field) -> str:
+def get_text(field):
     if not field:
         return ""
     if isinstance(field, str):
@@ -51,36 +62,31 @@ def get_text(field) -> str:
         return field.get("text", "")
     return ""
 
-
-def clean_html(text: str) -> str:
+def clean_html(text):
     return re.sub(r"<[^>]+>", "", text or "")
 
-
-def extract_keywords(text: str) -> list:
+def extract_keywords(text):
     return re.findall(r"<match[^>]*>(.*?)</match>", text or "")
 
+def preprocess_text(text):
+    text = clean_html(text).lower()
+    words = re.findall(r"\b[a-zA-Z]+\b", text)
+    return [w for w in words if w not in STOP_WORDS and len(w) > 2]
 
 # ─── IST DATE HELPERS ─────────────────────────────────────────────────────────
-
 def get_today_ist_date():
     return datetime.now(IST).date()
 
+def filter_today_ist(documents):
+    today = get_today_ist_date()
+    return [
+        doc for doc in documents
+        if doc.get("unix_timestamp") and
+        datetime.fromtimestamp(doc["unix_timestamp"], tz=IST).date() == today
+    ]
 
-def filter_today_ist(documents: list) -> list:
-    today_ist = get_today_ist_date()
-    filtered = []
-    for doc in documents:
-        ts = doc.get("unix_timestamp")
-        if ts:
-            article_date_ist = datetime.fromtimestamp(ts, tz=IST).date()
-            if article_date_ist == today_ist:
-                filtered.append(doc)
-    return filtered
-
-
-# ─── CORE SEARCH FUNCTION ─────────────────────────────────────────────────────
-
-def search_articles(searchterm: str, num_articles: int = 500, context: str = "") -> dict:
+# ─── API ──────────────────────────────────────────────────────────────────────
+def search_articles(searchterm, num_articles=2000):
     payload = {
         "searchterm": searchterm,
         "params": {
@@ -92,105 +98,83 @@ def search_articles(searchterm: str, num_articles: int = 500, context: str = "")
                 "quotes": 2,
                 "matches": True,
             },
-            **({"context": context} if context else {}),
         },
     }
 
-    response = requests.post(BASE_URL, headers=HEADERS, json=payload, timeout=30)
-    response.raise_for_status()
-    return response.json()
+    res = requests.post(BASE_URL, headers=HEADERS, json=payload, timeout=30)
+    res.raise_for_status()
+    return res.json()
 
+# ─── NLP FUNCTIONS ────────────────────────────────────────────────────────────
+def get_sentiment(text):
+    try:
+        polarity = TextBlob(text).sentiment.polarity
+        if polarity > 0:
+            return "positive"
+        elif polarity < 0:
+            return "negative"
+        return "neutral"
+    except:
+        return "neutral"
 
-# ─── CLEANED ARTICLE MAPPER ───────────────────────────────────────────────────
+def get_summary(text):
+    try:
+        sentences = nltk.sent_tokenize(text)
+        return " ".join(sentences[:2])  # simple + fast
+    except:
+        return ""
 
-def map_article(doc: dict, index: int) -> dict:
-    header_raw  = get_text(doc.get("header"))
-    summary_raw = get_text(doc.get("summary"))
-    body_raw    = get_text(doc.get("body"))
+# ─── ARTICLE MAPPER ───────────────────────────────────────────────────────────
+def map_article(doc, index):
+    header = clean_html(get_text(doc.get("header")))
+    summary = clean_html(get_text(doc.get("summary")))
+    body = clean_html(get_text(doc.get("body")))
+
+    full_text = f"{header} {summary} {body}"
 
     keywords = (
-        extract_keywords(header_raw)
-        + extract_keywords(summary_raw)
-        + extract_keywords(body_raw)
+        extract_keywords(get_text(doc.get("header"))) +
+        extract_keywords(get_text(doc.get("summary"))) +
+        extract_keywords(get_text(doc.get("body")))
     )
 
-    # ✅ NORMALIZE KEYWORDS HERE
-    normalized_keywords = [normalize_keyword(k) for k in keywords]
-
-    unique_keywords = list(dict.fromkeys(normalized_keywords))
-
-    quotes_raw = doc.get("quotes", [])
-    quotes = [clean_html(get_text(q)) for q in quotes_raw] if isinstance(quotes_raw, list) else []
-
-    short_header  = clean_html(get_text(doc.get("short_header", "")))
-    short_summary = clean_html(get_text(doc.get("short_summary", "")))
-    short_body    = clean_html(get_text(doc.get("short_body", "")))
-
-    site_rank = doc.get("site_rank") or {}
-
-    similarweb = doc.get("similarweb") or {}
-    readership = {
-        "monthly_visits": similarweb.get("readership", "N/A"),
-        "article_readership": similarweb.get("article_readership", "N/A"),
-    }
+    normalized_keywords = list(dict.fromkeys([normalize_keyword(k) for k in keywords]))
 
     ts = doc.get("unix_timestamp")
 
     return {
         "id": index + 1,
-        "title": clean_html(header_raw),
-        "summary": clean_html(summary_raw),
-        "body": clean_html(body_raw),
+        "title": header,
+        "summary": summary,
+        "body": body,
+        "matched_keywords": normalized_keywords,
 
-        "short_header": short_header,
-        "short_summary": short_summary,
-        "short_body": short_body,
+        "sentiment": get_sentiment(full_text),
+        "ai_summary": get_summary(full_text),
 
-        "quotes": quotes,
-        "matched_keywords": unique_keywords,
+        "tokens": preprocess_text(full_text),
 
-        "url": doc.get("url", "N/A"),
+        "published_at_ist": datetime.fromtimestamp(ts, tz=IST).strftime("%Y-%m-%d %H:%M IST") if ts else "N/A",
         "source": (doc.get("first_source") or {}).get("name", "N/A"),
-
-        "published_at_unix": ts,
-        "published_at_ist": (
-            datetime.fromtimestamp(ts, tz=IST).strftime("%Y-%m-%d %H:%M IST")
-            if ts else "N/A"
-        ),
-        "local_time": get_text(doc.get("local_time")),
-
-        "image_url": (
-            ((doc.get("articleimages") or {}).get("articleimage") or [{}])[0].get("url", "")
-        ),
-
-        "article_details": {
-            "entity": get_text(doc.get("entity")),
-            "website": (doc.get("first_source") or {}).get("homepage", "N/A"),
-            "author": get_text(doc.get("author")),
-            "monthly_visitors": doc.get("circulation", "N/A"),
-            "readership": readership,
-            "global_rank": site_rank.get("rank_global", "N/A"),
-            "country_rank": site_rank.get("rank_country", "N/A"),
-            "genre": get_text(doc.get("mediatype"))
-        },
+        "url": doc.get("url", "N/A"),
     }
 
-
 # ─── MAIN ─────────────────────────────────────────────────────────────────────
-
 if __name__ == "__main__":
 
     SEARCH_TERMS = [
-        ('"Kotak Securities"', '"कोटक सिक्योरिटीज"'),
-        ('"Geojit"', '"जियोजित"'),
-        ('"ICICI Securities"', '"आईसीआईसीआई सिक्योरिटीज"'),
-        ('"Indiainfoline"', '"इंडिया इंफोलाइन"'),
-        ('"Motilal Oswal"', '"मोतीलाल ओसवाल"')
+        ['"Kotak Securities"', '"कोटक सिक्योरिटीज"'],
+        ['"Geojit"', '"जियोजित"'],
+        ['"ICICI Securities"', '"आईसीआईसीआई सिक्योरिटीज"'],
+        ['"Indiainfoline"', '"इंडिया इंफोलाइन"'],
+        ['"Motilal Oswal"', '"मोतीलाल ओसवाल"'],
+        ['"Zerodha"', '"ज़ेरोधा"'],
+        ['"Prudent"',],
+        ['"Angel One"',],
+        ['"Groww"',],
     ]
 
-    SEARCH_TERM = " OR ".join(
-        f"({ ' OR '.join(group) })" for group in SEARCH_TERMS
-    )
+    SEARCH_TERM = " OR ".join(f"({ ' OR '.join(g) })" for g in SEARCH_TERMS)
 
     print(f">> Searching: {SEARCH_TERM}")
 
@@ -199,33 +183,57 @@ if __name__ == "__main__":
     context = data.get("searchresult", {}).get("context", "")
 
     today_docs = filter_today_ist(documents)
-
     articles = [map_article(doc, i) for i, doc in enumerate(today_docs)]
 
-    # ─── KEYWORD COUNT (WITH NORMALIZATION) ──────────────────────────
-    keyword_counts = {}
+    # ─── ANALYTICS ────────────────────────────────────────────────
+    keyword_counts = Counter()
+    sentiment_by_brand = defaultdict(lambda: {"positive": 0, "negative": 0, "neutral": 0})
+    bow = defaultdict(Counter)
+
     for article in articles:
-        for kw in article.get("matched_keywords", []):
-            keyword_counts[kw] = keyword_counts.get(kw, 0) + 1
+        kws = article["matched_keywords"]
+        tokens = article["tokens"]
+        sentiment = article["sentiment"]
+
+        for kw in kws:
+            keyword_counts[kw] += 1
+
+            for word in tokens:
+                bow[kw][word] += 1
+
+            sentiment_by_brand[kw][sentiment] += 1
+
+    bow_top = {k: dict(v.most_common(15)) for k, v in bow.items()}
 
     output = {
-        "total": len(articles),
         "date": str(get_today_ist_date()),
+        "total": len(articles),
         "context": context,
-        "keyword_counts": keyword_counts,
+        "keyword_counts": dict(keyword_counts),
+        "sentiment_by_brand": dict(sentiment_by_brand),
+        "bag_of_words": bow_top,
         "articles": articles,
     }
 
-    with open("cleaned_articles.json", "w", encoding="utf-8") as f:
+    # ─── SAVE FILE ────────────────────────────────────────────────
+    with open("final_output.json", "w", encoding="utf-8") as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
 
-    print(f"✅ Saved {len(articles)} cleaned articles to file")
+    print(f"✅ Saved {len(articles)} enriched articles")
 
+    # ─── MONGODB STORE (SAFE UPSERT) ──────────────────────────────
     try:
-        if output["articles"]:
-            collection.insert_one(output)
-            print("✅ Data stored in MongoDB (collection: opoint_articles)")
-        else:
-            print("⚠️ No data to store")
+        MAX_ARTICLES = 1000
+        if len(output["articles"]) > MAX_ARTICLES:
+            output["articles"] = output["articles"][:MAX_ARTICLES]
+
+        collection.update_one(
+            {"date": output["date"]},
+            {"$set": output},
+            upsert=True
+        )
+
+        print("✅ Stored in MongoDB (single document per day)")
+
     except Exception as e:
         print("❌ MongoDB Error:", str(e))
