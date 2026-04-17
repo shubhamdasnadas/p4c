@@ -39,7 +39,10 @@ export async function GET() {
       context: doc.context,
       keyword_counts: doc.keyword_counts,
       articles,
-      bag_of_words: doc.bag_of_words
+      bag_of_words: doc.bag_of_words,
+      sentiment_by_brand: doc.sentiment_by_brand,
+      author_counts: doc.author_counts,
+      source_counts: doc.source_counts
     });
 
   } catch (err: any) {

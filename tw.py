@@ -73,6 +73,12 @@ def preprocess_text(text):
     words = re.findall(r"\b[a-zA-Z]+\b", text)
     return [w for w in words if w not in STOP_WORDS and len(w) > 2]
 
+def clean_author(author):
+    return author.strip() if author else "Unknown"
+
+def clean_source(source):
+    return source.strip() if source else "Unknown"
+
 # ─── IST DATE HELPERS ─────────────────────────────────────────────────────────
 def get_today_ist_date():
     return datetime.now(IST).date()
@@ -85,7 +91,7 @@ def filter_today_ist(documents):
         datetime.fromtimestamp(doc["unix_timestamp"], tz=IST).date() == today
     ]
 
-# ─── API ──────────────────────────────────────────────────────────────────────
+# ─── API CALL ─────────────────────────────────────────────────────────────────
 def search_articles(searchterm, num_articles=2000):
     payload = {
         "searchterm": searchterm,
@@ -120,7 +126,7 @@ def get_sentiment(text):
 def get_summary(text):
     try:
         sentences = nltk.sent_tokenize(text)
-        return " ".join(sentences[:2])  # simple + fast
+        return " ".join(sentences[:2])
     except:
         return ""
 
@@ -141,6 +147,7 @@ def map_article(doc, index):
     normalized_keywords = list(dict.fromkeys([normalize_keyword(k) for k in keywords]))
 
     ts = doc.get("unix_timestamp")
+    site_rank = doc.get("site_rank") or {}
 
     return {
         "id": index + 1,
@@ -149,13 +156,18 @@ def map_article(doc, index):
         "body": body,
         "matched_keywords": normalized_keywords,
 
+        "author": clean_author(get_text(doc.get("author"))),
+        "source": clean_source((doc.get("first_source") or {}).get("name")),
+
+        # ✅ RESTORED
+        "global_rank": site_rank.get("rank_global", "N/A"),
+        "country_rank": site_rank.get("rank_country", "N/A"),
+
         "sentiment": get_sentiment(full_text),
         "ai_summary": get_summary(full_text),
-
         "tokens": preprocess_text(full_text),
 
         "published_at_ist": datetime.fromtimestamp(ts, tz=IST).strftime("%Y-%m-%d %H:%M IST") if ts else "N/A",
-        "source": (doc.get("first_source") or {}).get("name", "N/A"),
         "url": doc.get("url", "N/A"),
     }
 
@@ -169,9 +181,9 @@ if __name__ == "__main__":
         ['"Indiainfoline"', '"इंडिया इंफोलाइन"'],
         ['"Motilal Oswal"', '"मोतीलाल ओसवाल"'],
         ['"Zerodha"', '"ज़ेरोधा"'],
-        ['"Prudent"',],
-        ['"Angel One"',],
-        ['"Groww"',],
+        ['"Prudent"'],
+        ['"Angel One"'],
+        ['"Groww"'],
     ]
 
     SEARCH_TERM = " OR ".join(f"({ ' OR '.join(g) })" for g in SEARCH_TERMS)
@@ -190,10 +202,19 @@ if __name__ == "__main__":
     sentiment_by_brand = defaultdict(lambda: {"positive": 0, "negative": 0, "neutral": 0})
     bow = defaultdict(Counter)
 
+    author_counts = Counter()
+    source_counts = Counter()
+
+    # ✅ NEW
+    source_keyword_map = defaultdict(lambda: Counter())
+    keyword_source_map = defaultdict(lambda: Counter())
+
     for article in articles:
         kws = article["matched_keywords"]
         tokens = article["tokens"]
         sentiment = article["sentiment"]
+        author = article["author"]
+        source = article["source"]
 
         for kw in kws:
             keyword_counts[kw] += 1
@@ -203,15 +224,48 @@ if __name__ == "__main__":
 
             sentiment_by_brand[kw][sentiment] += 1
 
+            # ✅ SOURCE → KEYWORD
+            source_keyword_map[source][kw] += 1
+
+            # ✅ KEYWORD → SOURCE
+            keyword_source_map[kw][source] += 1
+
+        author_counts[author] += 1
+        source_counts[source] += 1
+
     bow_top = {k: dict(v.most_common(15)) for k, v in bow.items()}
+
+    source_keyword_breakdown = {
+        src: dict(counter)
+        for src, counter in source_keyword_map.items()
+    }
+
+    keyword_source_breakdown = {
+        kw: dict(counter)
+        for kw, counter in keyword_source_map.items()
+    }
 
     output = {
         "date": str(get_today_ist_date()),
         "total": len(articles),
         "context": context,
+
         "keyword_counts": dict(keyword_counts),
         "sentiment_by_brand": dict(sentiment_by_brand),
         "bag_of_words": bow_top,
+
+        "author_counts": dict(author_counts),
+        "unique_authors": len(author_counts),
+
+        "source_counts": dict(source_counts),
+        "unique_sources": len(source_counts),
+
+        # ✅ YOUR FEATURE
+        "source_keyword_breakdown": source_keyword_breakdown,
+
+        # ✅ BONUS
+        "keyword_source_breakdown": keyword_source_breakdown,
+
         "articles": articles,
     }
 
@@ -220,8 +274,10 @@ if __name__ == "__main__":
         json.dump(output, f, indent=2, ensure_ascii=False)
 
     print(f"✅ Saved {len(articles)} enriched articles")
+    print(f"👤 Unique Authors: {len(author_counts)}")
+    print(f"📰 Unique Sources: {len(source_counts)}")
 
-    # ─── MONGODB STORE (SAFE UPSERT) ──────────────────────────────
+    # ─── MONGODB STORE ────────────────────────────────────────────
     try:
         MAX_ARTICLES = 1000
         if len(output["articles"]) > MAX_ARTICLES:

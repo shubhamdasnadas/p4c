@@ -1,7 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
@@ -9,16 +8,19 @@ const nextConfig: NextConfig = {
     });
     return config;
   },
-    
-    turbopack: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
+
+  turbopack: {
+    rules: {
+      "*.svg": {
+        loaders: ["@svgr/webpack"],
+        as: "*.js",
       },
     },
-  
+  },
+
+  // ✅ ADD THIS
+  allowedDevOrigins: ["192.168.9.100"],
+
 };
 
 export default nextConfig;
