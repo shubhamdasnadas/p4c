@@ -42,7 +42,8 @@ export async function GET() {
       bag_of_words: doc.bag_of_words,
       sentiment_by_brand: doc.sentiment_by_brand,
       author_counts: doc.author_counts,
-      source_counts: doc.source_counts
+      source_counts: doc.source_counts,
+      source_keyword_breakdown: doc.source_keyword_breakdown,
     });
 
   } catch (err: any) {

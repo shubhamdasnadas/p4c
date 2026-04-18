@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -8,187 +9,265 @@ import {
   YAxis,
   Tooltip,
   ResponsiveContainer,
-  CartesianGrid,
   Legend,
-  LabelList,
+  CartesianGrid,
 } from "recharts";
 
-type ChartRow = {
-  keyword: string;
-  [key: string]: any;
-};
-
-const COLORS = [
-  "#22c55e",
-  "#0ea5e9",
+const colors = [
+  "#f59e0b",
   "#f97316",
   "#ef4444",
+  "#fb7185",
+  "#ec4899",
   "#a855f7",
-  "#14b8a6",
   "#6366f1",
-  "#94a3b8",
+  "#14b8a6",
+  "#84cc16",
+  "#6b7280",
+  "#0ea5e9",
+  "#22c55e",
+  "#f43f5e",
+  "#8b5cf6",
+  "#facc15",
 ];
 
-const KeywordSourceStack = () => {
-  const [data, setData] = useState<ChartRow[]>([]);
-  const [sources, setSources] = useState<string[]>([]);
+const SourceKeywordGraph = () => {
+  const [chartData, setChartData] = useState<any[]>([]);
+  const [keys, setKeys] = useState<string[]>([]);
+  const [colorMap, setColorMap] = useState<Record<string, string>>({});
 
   useEffect(() => {
     fetch("/api/opointNews")
       .then((res) => res.json())
       .then((res) => {
-        const articles = res?.articles || [];
+        const sourceCount = res?.source_counts;
+        const keywordBreakdown = res?.source_keyword_breakdown;
 
-        console.log("ARTICLE SAMPLE 👉", articles[0]);
-
-        if (!articles.length) {
-          setData([]);
+        if (!sourceCount || !keywordBreakdown) {
+          setChartData([]);
           return;
         }
 
-        const keywordMap: Record<string, Record<string, number>> = {};
+        const topSources = Object.entries(sourceCount)
+          .map(([source, count]: any) => ({
+            source,
+            count: Number(count) || 0,
+          }))
+          .sort((a, b) => b.count - a.count)
+          .slice(0, 10);
 
-        articles.forEach((a: any) => {
-          const source = a?.source?.name || "Unknown";
+        const globalKeywordMap: Record<string, number> = {};
 
-          // 🔥 UNIVERSAL KEYWORD EXTRACTION
-          let keywords: string[] = [];
+        const data = topSources.map((item) => {
+          const obj: any = {
+            source: item.source,
+          };
 
-          if (Array.isArray(a?.match_keywords)) {
-            keywords = a.match_keywords;
-          } else if (a?.match_keyword) {
-            keywords = [a.match_keyword];
-          } else if (Array.isArray(a?.keywords)) {
-            keywords = a.keywords;
-          } else if (a?.keyword) {
-            keywords = [a.keyword];
-          } else {
-            return; // ❌ skip if no keyword
-          }
+          const keywordsObj = keywordBreakdown[item.source] || {};
 
-          keywords.forEach((kw) => {
-            const keyword = String(kw).trim();
+          // Combine similar keyword names
+          const mergedKeywords: Record<string, number> = {};
 
-            if (!keyword) return;
+          Object.entries(keywordsObj).forEach(([keyword, count]: any) => {
+            const normalizedKeyword = keyword
+              .toLowerCase()
+              .replace(/[^a-z0-9 ]/g, "")
+              .trim();
 
-            if (!keywordMap[keyword]) keywordMap[keyword] = {};
+            let matchedKey = Object.keys(mergedKeywords).find((existingKey) => {
+              const normalizedExisting = existingKey
+                .toLowerCase()
+                .replace(/[^a-z0-9 ]/g, "")
+                .trim();
 
-            keywordMap[keyword][source] =
-              (keywordMap[keyword][source] || 0) + 1;
-          });
-        });
-
-        // ❗ if still empty
-        if (Object.keys(keywordMap).length === 0) {
-          console.warn("No keyword mapping created");
-          setData([]);
-          return;
-        }
-
-        // ✅ Convert to %
-        const rows: ChartRow[] = Object.entries(keywordMap).map(
-          ([keyword, sourcesObj]) => {
-            const total = Object.values(sourcesObj).reduce(
-              (a, b) => a + Number(b),
-              0
-            );
-
-            const row: ChartRow = { keyword };
-
-            Object.entries(sourcesObj).forEach(([src, val]) => {
-              row[src] = Number(((val / total) * 100).toFixed(2));
+              return (
+                normalizedKeyword.includes(normalizedExisting) ||
+                normalizedExisting.includes(normalizedKeyword)
+              );
             });
 
-            return row;
-          }
-        );
-
-        // ✅ Top 10 keywords
-        const sorted = Object.entries(keywordMap)
-          .map(([keyword, srcs]) => ({
-            keyword,
-            total: Object.values(srcs).reduce(
-              (a, b) => a + Number(b),
-              0
-            ),
-          }))
-          .sort((a, b) => b.total - a.total)
-          .slice(0, 10)
-          .map((item) =>
-            rows.find((r) => r.keyword === item.keyword)
-          )
-          .filter((r): r is ChartRow => Boolean(r));
-
-        // ✅ Collect sources
-        const allSources = new Set<string>();
-        sorted.forEach((row) => {
-          Object.keys(row).forEach((k) => {
-            if (k !== "keyword") allSources.add(k);
+            if (matchedKey) {
+              mergedKeywords[matchedKey] += Number(count) || 0;
+            } else {
+              mergedKeywords[keyword] = Number(count) || 0;
+            }
           });
+
+          const sortedKeywords = Object.entries(mergedKeywords)
+            .map(([keyword, count]) => ({
+              name: keyword,
+              count: Number(count) || 0,
+            }))
+            .filter((item) => item.count > 0)
+            .sort((a, b) => b.count - a.count);
+
+          // Show all keywords instead of only top 5
+          sortedKeywords.forEach((keyword) => {
+            obj[keyword.name] = keyword.count;
+
+            globalKeywordMap[keyword.name] =
+              (globalKeywordMap[keyword.name] || 0) + keyword.count;
+          });
+
+          return obj;
         });
 
-        setSources(Array.from(allSources));
-        setData(sorted);
+        const finalKeys = Object.entries(globalKeywordMap)
+          .sort((a, b) => b[1] - a[1])
+          .map(([key]) => key);
 
-        console.log("FINAL DATA 👉", sorted);
+        const generatedColorMap: Record<string, string> = {};
+
+        finalKeys.forEach((key, index) => {
+          generatedColorMap[key] = colors[index % colors.length];
+        });
+
+        setChartData(data);
+        setKeys(finalKeys);
+        setColorMap(generatedColorMap);
       })
       .catch((err) => {
-        console.error("ERROR 👉", err);
-        setData([]);
+        console.error("Chart API Error:", err);
+        setChartData([]);
       });
   }, []);
 
+  const CustomTooltip = ({ active, payload, label }: any) => {
+    if (!active || !payload || payload.length === 0) return null;
+
+    const filteredPayload = payload
+      .filter((entry: any) => entry.value > 0)
+      .sort((a: any, b: any) => b.value - a.value);
+
+    return (
+      <div
+        style={{
+          backgroundColor: "#ffffff",
+          border: "1px solid #d1d5db",
+          borderRadius: "8px",
+          padding: "12px",
+          boxShadow: "0 2px 10px rgba(0,0,0,0.15)",
+          maxHeight: "350px",
+          overflowY: "auto",
+        }}
+      >
+        <div
+          style={{
+            fontWeight: 600,
+            marginBottom: "10px",
+            color: "#111827",
+          }}
+        >
+          {label}
+        </div>
+
+        {filteredPayload.map((entry: any, index: number) => (
+          <div
+            key={index}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              marginBottom: "6px",
+            }}
+          >
+            <div
+              style={{
+                width: "10px",
+                height: "10px",
+                borderRadius: "50%",
+                backgroundColor: entry.color,
+                marginRight: "8px",
+                flexShrink: 0,
+              }}
+            />
+
+            <span
+              style={{
+                color: entry.color,
+                fontSize: "13px",
+                fontWeight: 500,
+                wordBreak: "break-word",
+              }}
+            >
+              {entry.name}: {entry.value}
+            </span>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
   return (
-    <div style={{ width: "100%", height: "500px", padding: "20px" }}>
-      <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
-        Top Publications (Articles)
+    <div
+      style={{
+        width: "100%",
+        height: "700px",
+        padding: "20px",
+      }}
+    >
+      <h2
+        style={{
+          textAlign: "center",
+          marginBottom: "20px",
+          fontSize: "18px",
+          fontWeight: 600,
+        }}
+      >
+        Clean Keyword Distribution (Top Sources)
       </h2>
 
-      {data.length === 0 && (
+      {chartData.length === 0 && (
         <p style={{ textAlign: "center", color: "red" }}>
           No data available
         </p>
       )}
 
-      {data.length > 0 && (
+      {chartData.length > 0 && (
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data}>
-            <CartesianGrid strokeDasharray="3 3" />
+          <BarChart
+            data={chartData}
+            margin={{ top: 20, right: 30, left: 20, bottom: 120 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" vertical={false} />
 
             <XAxis
-              dataKey="keyword"
-              angle={-30}
-              textAnchor="end"
+              dataKey="source"
               interval={0}
-              height={80}
+              angle={-25}
+              textAnchor="end"
+              height={90}
+              tick={{ fontSize: 12 }}
             />
 
-            <YAxis domain={[0, 100]} tickFormatter={(v) => `${v}%`} />
-
-            <Tooltip
-              formatter={(value: any, name: any) => [
-                `${Number(value).toFixed(2)}%`,
-                String(name),
-              ]}
+            <YAxis
+              allowDecimals={false}
+              tick={{ fontSize: 12 }}
+              label={{
+                value: "Keyword Count",
+                angle: -90,
+                position: "insideLeft",
+                style: { textAnchor: "middle" },
+              }}
             />
 
-            <Legend />
+            <Tooltip content={<CustomTooltip />} />
 
-            {sources.map((src, i) => (
+            <Legend
+              verticalAlign="bottom"
+              align="center"
+              wrapperStyle={{
+                paddingTop: "20px",
+                fontSize: "12px",
+              }}
+            />
+
+            {keys.map((key, index) => (
               <Bar
-                key={src}
-                dataKey={src}
+                key={key}
+                dataKey={key}
                 stackId="a"
-                fill={COLORS[i % COLORS.length]}
-              >
-                <LabelList
-                  dataKey={src}
-                  position="center"
-                  formatter={(v: any) =>
-                    v > 5 ? v.toFixed(2) : ""
-                  }
-                />
-              </Bar>
+                fill={colorMap[key] || colors[index % colors.length]}
+              />
             ))}
           </BarChart>
         </ResponsiveContainer>
@@ -197,4 +276,5 @@ const KeywordSourceStack = () => {
   );
 };
 
-export default KeywordSourceStack;
+export default SourceKeywordGraph;
+
